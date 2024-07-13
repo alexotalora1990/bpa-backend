@@ -1,76 +1,89 @@
-// import Plan from "../models/plan.js";
+import Comprador from "../models/Comprador.js";
 
-// const httpPlanes = {
-//     // Obtener todos los planes
-//     getPlanes: async (req, res) => {
-//         try {
-//             const planes = await Plan.find();
-//             res.json({ planes });
-//         } catch (error) {
-//             res.status(500).json({ error: "Error al obtener los planes" });
-//         }
-//     },
+const httpsComprador = {
+    getCompradores: async (req, res) => {
+        try {
+            const compradores = await Comprador.find().populate('idproduccion');
+            res.json({ compradores });
+        } catch (error) {
+            console.error('Error al obtener los compradores:', error);
+            res.status(500).json({ message: 'Error interno del servidor' });
+        }
+    },
+    getCompradorID: async (req, res) => {
+        const { id } = req.params;
+        try {
+            const comprador = await Comprador.findById(id).populate('idproduccion');
+            if (!comprador) {
+                return res.status(404).json({ message: 'Comprador no encontrado' });
+            }
+            res.json({ comprador });
+        } catch (error) {
+            console.error('Error al obtener el comprador por ID:', error);
+            res.status(500).json({ message: 'Error interno del servidor' });
+        }
+    },
+    getCompradoresActivos: async (req, res) => {
+        try {
+            const compradores = await Comprador.find({ estado: 1 }).populate('idproduccion');
+            res.json({ compradores });
+        } catch (error) {
+            console.error('Error al obtener los compradores activos:', error);
+            res.status(500).json({ message: 'Error interno del servidor' });
+        }
+    },
+    getCompradoresInactivos: async (req, res) => {
+        try {
+            const compradores = await Comprador.find({ estado: 0 }).populate('idproduccion');
+            res.json({ compradores });
+        } catch (error) {
+            console.error('Error al obtener los compradores inactivos:', error);
+            res.status(500).json({ message: 'Error interno del servidor' });
+        }
+    },
+    postComprador: async (req, res) => {
+        try {
+            const { idproduccion, especie, nombre, telefono, cantidad, numguiaTransporte, numloteComercial, valor } = req.body;
+            const comprador = new Comprador({ idproduccion, especie, nombre, telefono, cantidad, numguiaTransporte, numloteComercial, valor });
+            await comprador.save();
+            res.json({ message: 'Comprador creado satisfactoriamente', comprador });
+        } catch (error) {
+            console.error('Error al crear comprador:', error);
+            res.status(400).json({ message: 'No se pudo crear el comprador' });
+        }
+    },
+    putComprador: async (req, res) => {
+        const { id } = req.params;
+        try {
+            const comprador = await Comprador.findByIdAndUpdate(id, req.body, { new: true });
+            res.json({ comprador });
+        } catch (error) {
+            console.error('Error al actualizar comprador:', error);
+            res.status(400).json({ message: 'No se pudo actualizar el comprador' });
+        }
+    },
+    putCompradorActivar: async (req, res) => {
+        const { id } = req.params;
+        try {
+            const comprador = await Comprador.findByIdAndUpdate(id, { estado: 1 }, { new: true });
+            res.json({ comprador });
+        } catch (error) {
+            console.error('Error al activar comprador:', error);
+            res.status(400).json({ message: 'No se pudo activar el comprador' });
+        }
+    },
+    putCompradorDesactivar: async (req, res) => {
+        const { id } = req.params;
+        try {
+            const comprador = await Comprador.findByIdAndUpdate(id, { estado: 0 }, { new: true });
+            res.json({ comprador });
+        } catch (error) {
+            console.error('Error al desactivar comprador:', error);
+            res.status(400).json({ message: 'No se pudo desactivar el comprador' });
+        }
+    }
+};
 
-//     // Obtener un plan por su ID
-//     getPlanByID: async (req, res) => {
-//         try {
-//             const { id } = req.params;
-//             const plan = await Plan.findById(id);
-//             if (!plan) {
-//                 return res.status(404).json({ error: "Plan no encontrado" });
-//             }
-//             res.json({ plan });
-//         } catch (error) {
-//             res.status(500).json({ error: "Error al obtener el plan" });
-//         }
-//     },
+export default httpsComprador;
 
-//     // Crear un nuevo plan
-//     postPlan: async (req, res) => {
-//         try {
-//             const { descripcion, valor, dias } = req.body;
-//             const nuevoPlan = new Plan({ descripcion, valor, dias });
-//             await nuevoPlan.save();
-//             res.status(201).json({ nuevoPlan });
-//         } catch (error) {
-//             res.status(400).json({ error: "No se pudo crear el plan" });
-//         }
-//     },
-
-//     // Actualizar un plan existente
-//     putPlan: async (req, res) => {
-//         try {
-//             const { id } = req.params;
-//             const { descripcion, valor, dias, estado } = req.body;
-//             const planActualizado = await Plan.findByIdAndUpdate(id, { descripcion, valor, dias, estado }, { new: true });
-//             res.json({ planActualizado });
-//         } catch (error) {
-//             res.status(400).json({ error: "No se pudo actualizar el plan" });
-//         }
-//     },
-
-//     // Activar un plan
-//     activarPlan: async (req, res) => {
-//         try {
-//             const { id } = req.params;
-//             const planActivado = await Plan.findByIdAndUpdate(id, { estado: 1 }, { new: true });
-//             res.json({ planActivado });
-//         } catch (error) {
-//             res.status(400).json({ error: "No se pudo activar el plan" });
-//         }
-//     },
-
-//     // Desactivar un plan
-//     desactivarPlan: async (req, res) => {
-//         try {
-//             const { id } = req.params;
-//             const planDesactivado = await Plan.findByIdAndUpdate(id, { estado: 0 }, { new: true });
-//             res.json({ planDesactivado });
-//         } catch (error) {
-//             res.status(400).json({ error: "No se pudo desactivar el plan" });
-//         }
-//     }
-// };
-
-// export default httpPlanes;
 
