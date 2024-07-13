@@ -1,5 +1,4 @@
 import Administrador from "../models/Administrador.js";
-import mongoose from "mongoose";
 import bcryptjs from "bcryptjs";
 import { generarJWT } from "../middleware/validar-jwts.js";
 
