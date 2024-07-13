@@ -11,7 +11,7 @@ const router = Router();
 router.get("/", [],httpAdmin.getAdmin);
     
 router.get("/admin/:id", [
-    validarJWT,
+    validarJWT, 
     check("id","ID de admin invalido").isMongoId(),
     check("id").custom(helpersAdmin.validarExistaIdAdministrador),
     validarCampos
@@ -37,7 +37,7 @@ router.get("/desactivados",[
 ],httpAdmin.getAdminInactivos);
 
 //actualizar
-
+ 
 router.put("/actualizar/:id",[
     check("id", "ID de admin inválido").isMongoId(),
     check("id").custom(helpersAdmin.validarExistaIdAdministrador),
