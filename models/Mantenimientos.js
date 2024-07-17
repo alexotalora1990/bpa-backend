@@ -11,4 +11,4 @@ const mantenimientoSchema = new mongoose.Schema({
 })
 
 
-export default mongoose.model("Mantenimiento",insumoSchema)
+export default mongoose.model("Mantenimiento",mantenimientoSchema)

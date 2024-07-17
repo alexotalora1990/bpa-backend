@@ -12,6 +12,7 @@ router.get("/", httpsElaboracionSustrato.getElaboraciones);
 
 router.get("/elaboracion/:id", [
     check('id', 'No es un ID válido').isMongoId(),
+    check('id').custom(helpersElaboracionSustrato.validarExistaIdElaboracionSustrato),
     validarCampos
 ], httpsElaboracionSustrato.getElaboracionID);
 

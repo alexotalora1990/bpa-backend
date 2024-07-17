@@ -1,76 +1,90 @@
-// import Plan from "../models/plan.js";
+import Gasto from "../models/Gastos.js";
 
-// const httpPlanes = {
-//     // Obtener todos los planes
-//     getPlanes: async (req, res) => {
-//         try {
-//             const planes = await Plan.find();
-//             res.json({ planes });
-//         } catch (error) {
-//             res.status(500).json({ error: "Error al obtener los planes" });
-//         }
-//     },
+const httpsGasto = {
+    getGastos: async (req, res) => {
+        try {
+            const gastos = await Gasto.find()
+            res.json({ gastos });
+        } catch (error) {
+            console.error('Error al obtener los gastos:', error);
+            res.status(500).json({ message: 'Error interno del servidor' });
+        }
+    },
+    getGastoID: async (req, res) => {
+        const { id } = req.params;
+        try {
+            const gasto = await Gasto.findById(id)
+                .populate('idinsumos')
+                .populate('idsemillas')
+                .populate('idmantenimiento');
+            if (!gasto) {
+                return res.status(404).json({ message: 'Gasto no encontrado' });
+            }
+            res.json({ gasto });
+        } catch (error) {
+            console.error('Error al obtener el gasto por ID:', error);
+            res.status(500).json({ message: 'Error interno del servidor' });
+        }
+    },
+    getGastosActivos: async (req, res) => {
+        try {
+            const gastos = await Gasto.find({ estado: 1 })
+            res.json({ gastos });
+        } catch (error) {
+            console.error('Error al obtener los gastos activos:', error);
+            res.status(500).json({ message: 'Error interno del servidor' });
+        }
+    },
+    getGastosInactivos: async (req, res) => {
+        try {
+            const gastos = await Gasto.find({ estado: 0 })
+            res.json({ gastos });
+        } catch (error) {
+            console.error('Error al obtener los gastos inactivos:', error);
+            res.status(500).json({ message: 'Error interno del servidor' });
+        }
+    },
+    postGasto: async (req, res) => {
+        try {
+            const { nombre, fecha, numfactura, descripcion, idinsumos, idsemillas, idmantenimiento } = req.body;
+            const gasto = new Gasto({ nombre, fecha, numfactura, descripcion, idinsumos, idsemillas, idmantenimiento });
+            await gasto.save();
+            res.json({ message: 'Gasto creado satisfactoriamente', gasto });
+        } catch (error) {
+            console.error('Error al crear gasto:', error);
+            res.status(400).json({ message: 'No se pudo crear el gasto' });
+        }
+    },
+    putGasto: async (req, res) => {
+        const { id } = req.params;
+        try {
+            const gasto = await Gasto.findByIdAndUpdate(id, req.body, { new: true });
+            res.json({ gasto });
+        } catch (error) {
+            console.error('Error al actualizar gasto:', error);
+            res.status(400).json({ message: 'No se pudo actualizar el gasto' });
+        }
+    },
+    putGastoActivar: async (req, res) => {
+        const { id } = req.params;
+        try {
+            const gasto = await Gasto.findByIdAndUpdate(id, { estado: 1 }, { new: true });
+            res.json({ gasto });
+        } catch (error) {
+            console.error('Error al activar gasto:', error);
+            res.status(400).json({ message: 'No se pudo activar el gasto' });
+        }
+    },
+    putGastoDesactivar: async (req, res) => {
+        const { id } = req.params;
+        try {
+            const gasto = await Gasto.findByIdAndUpdate(id, { estado: 0 }, { new: true });
+            res.json({ gasto });
+        } catch (error) {
+            console.error('Error al desactivar gasto:', error);
+            res.status(400).json({ message: 'No se pudo desactivar el gasto' });
+        }
+    }
+};
 
-//     // Obtener un plan por su ID
-//     getPlanByID: async (req, res) => {
-//         try {
-//             const { id } = req.params;
-//             const plan = await Plan.findById(id);
-//             if (!plan) {
-//                 return res.status(404).json({ error: "Plan no encontrado" });
-//             }
-//             res.json({ plan });
-//         } catch (error) {
-//             res.status(500).json({ error: "Error al obtener el plan" });
-//         }
-//     },
-
-//     // Crear un nuevo plan
-//     postPlan: async (req, res) => {
-//         try {
-//             const { descripcion, valor, dias } = req.body;
-//             const nuevoPlan = new Plan({ descripcion, valor, dias });
-//             await nuevoPlan.save();
-//             res.status(201).json({ nuevoPlan });
-//         } catch (error) {
-//             res.status(400).json({ error: "No se pudo crear el plan" });
-//         }
-//     },
-
-//     // Actualizar un plan existente
-//     putPlan: async (req, res) => {
-//         try {
-//             const { id } = req.params;
-//             const { descripcion, valor, dias, estado } = req.body;
-//             const planActualizado = await Plan.findByIdAndUpdate(id, { descripcion, valor, dias, estado }, { new: true });
-//             res.json({ planActualizado });
-//         } catch (error) {
-//             res.status(400).json({ error: "No se pudo actualizar el plan" });
-//         }
-//     },
-
-//     // Activar un plan
-//     activarPlan: async (req, res) => {
-//         try {
-//             const { id } = req.params;
-//             const planActivado = await Plan.findByIdAndUpdate(id, { estado: 1 }, { new: true });
-//             res.json({ planActivado });
-//         } catch (error) {
-//             res.status(400).json({ error: "No se pudo activar el plan" });
-//         }
-//     },
-
-//     // Desactivar un plan
-//     desactivarPlan: async (req, res) => {
-//         try {
-//             const { id } = req.params;
-//             const planDesactivado = await Plan.findByIdAndUpdate(id, { estado: 0 }, { new: true });
-//             res.json({ planDesactivado });
-//         } catch (error) {
-//             res.status(400).json({ error: "No se pudo desactivar el plan" });
-//         }
-//     }
-// };
-
-// export default httpPlanes;
-
+export default httpsGasto;
