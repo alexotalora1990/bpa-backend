@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const insumoSchema = new mongoose.Schema({
+const inventarioSchema = new mongoose.Schema({
     tipo:{type:String,required:true},
     observacion:{type:String,required:true},
     unidad:{type:String,required:true},
@@ -12,4 +12,4 @@ const insumoSchema = new mongoose.Schema({
 })
 
 
-export default mongoose.model("Insumo",insumoSchema)
+export default mongoose.model("Inventario",inventarioSchema)
