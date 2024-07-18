@@ -1,18 +1,12 @@
-import Siembra from "../models/Administrador.js"
+import Siembra from "../models/Siembra.js"
 
     const helpersSiembra = {
         validarExistaIdSiembra:async (id)=>{
-            const existe = await Administrador.findById(id)
+            const existe = await Siembra.findById(id)
             if (existe==undefined){
-                throw new Error ("Id del cliente no existe")
-            }
-        },
-        validarCorreoUnico:async (correo) =>{
-            const unico = await Administrador.findOne({correo})
-            if(unico){
-                throw new Error ("Correo Existe")
+                throw new Error ("Id de la Siembra no existe")
             }
         }
 }
 
-export default helpersAdmin
+export default helpersSiembra
