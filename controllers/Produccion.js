@@ -1,5 +1,4 @@
 import Produccion from "../models/Produccion.js";
-import Plan from "../models/Produccion.js";
 
 const httpProduccion= {
     getProduccion: async (req,res) => {

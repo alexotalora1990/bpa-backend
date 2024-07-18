@@ -1,64 +1,93 @@
-// import Inventario from "../models/inventario.js";
+import Inventario from "../models/Inventarios.js";
 
+const httpsInventario = {
+    getInventarios: async (req, res) => {
+        try {
+            const inventarios = await Inventario.find()
+                .populate('idsemillas')
+                .populate('idinsumos')
+                .populate('idmaquinaria');
+            res.json({ inventarios });
+        } catch (error) {
+            console.error('Error al obtener los inventarios:', error);
+            res.status(500).json({ message: 'Error interno del servidor' });
+        }
+    },
+    getInventarioID: async (req, res) => {
+        const { id } = req.params;
+        try {
+            const inventario = await Inventario.findById(id)
+                .populate('idsemillas')
+                .populate('idinsumos')
+                .populate('idmaquinaria');
+            if (!inventario) {
+                return res.status(404).json({ message: 'Inventario no encontrado' });
+            }
+            res.json({ inventario });
+        } catch (error) {
+            console.error('Error al obtener el inventario por ID:', error);
+            res.status(500).json({ message: 'Error interno del servidor' });
+        }
+    },
+    getInventariosActivos: async (req, res) => {
+        try {
+            const inventarios = await Inventario.find({ estado: 1 })
+            res.json({ inventarios });
+        } catch (error) {
+            console.error('Error al obtener los inventarios activos:', error);
+            res.status(500).json({ message: 'Error interno del servidor' });
+        }
+    },
+    getInventariosInactivos: async (req, res) => {
+        try {
+            const inventarios = await Inventario.find({ estado: 0 })
+            res.json({ inventarios });
+        } catch (error) {
+            console.error('Error al obtener los inventarios inactivos:', error);
+            res.status(500).json({ message: 'Error interno del servidor' });
+        }
+    },
+    postInventario: async (req, res) => {
+        try {
+            const { tipo, observacion, unidad, cantidad, idsemillas, idinsumos, idmaquinaria } = req.body;
+            const inventario = new Inventario({ tipo, observacion, unidad, cantidad, idsemillas, idinsumos, idmaquinaria });
+            await inventario.save();
+            res.json({ message: 'Inventario creado satisfactoriamente', inventario });
+        } catch (error) {
+            console.error('Error al crear inventario:', error);
+            res.status(400).json({ message: 'No se pudo crear el inventario' });
+        }
+    },
+    putInventario: async (req, res) => {
+        const { id } = req.params;
+        try {
+            const inventario = await Inventario.findByIdAndUpdate(id, req.body, { new: true });
+            res.json({ inventario });
+        } catch (error) {
+            console.error('Error al actualizar inventario:', error);
+            res.status(400).json({ message: 'No se pudo actualizar el inventario' });
+        }
+    },
+    putInventarioActivar: async (req, res) => {
+        const { id } = req.params;
+        try {
+            const inventario = await Inventario.findByIdAndUpdate(id, { estado: 1 }, { new: true });
+            res.json({ inventario });
+        } catch (error) {
+            console.error('Error al activar inventario:', error);
+            res.status(400).json({ message: 'No se pudo activar el inventario' });
+        }
+    },
+    putInventarioDesactivar: async (req, res) => {
+        const { id } = req.params;
+        try {
+            const inventario = await Inventario.findByIdAndUpdate(id, { estado: 0 }, { new: true });
+            res.json({ inventario });
+        } catch (error) {
+            console.error('Error al desactivar inventario:', error);
+            res.status(400).json({ message: 'No se pudo desactivar el inventario' });
+        }
+    }
+};
 
-// const httpInventario = {
-//     // Obtener todos los elementos del inventario
-//     getInventario: async (req, res) => {
-//         try {
-//             const inventario = await Inventario.find();
-//             res.json({ inventario });
-//         } catch (error) {
-//             res.status(500).json({ error: "Error al obtener el inventario" });
-//         }
-//     },
-
-//     // Obtener un elemento del inventario por su ID
-//     getInventarioByID: async (req, res) => {
-//         try {
-//             const { id } = req.params;
-//             const elementoInventario = await Inventario.findById(id);
-//             if (!elementoInventario) {
-//                 return res.status(404).json({ error: "Elemento de inventario no encontrado" });
-//             }
-//             res.json({ elementoInventario });
-//         } catch (error) {
-//             res.status(500).json({ error: "Error al obtener el elemento del inventario" });
-//         }
-//     },
-
-//     // Crear un nuevo elemento en el inventario
-//     postInventario: async (req, res) => {
-//         try {
-//             const { idInventario, descripcion, valor, cantidad } = req.body;
-//             const nuevoElementoInventario = new Inventario({ idInventario, descripcion, valor, cantidad });
-//             await nuevoElementoInventario.save();
-//             res.status(201).json({ nuevoElementoInventario });
-//         } catch (error) {
-//             res.status(400).json({ error: "No se pudo crear el elemento en el inventario" });
-//         }
-//     },
-
-//     // Actualizar un elemento del inventario
-//     putInventario: async (req, res) => {
-//         try {
-//             const { id } = req.params;
-//             const { idInventario, descripcion, valor, cantidad } = req.body;
-//             const elementoInventarioActualizado = await Inventario.findByIdAndUpdate(id, { idInventario, descripcion, valor, cantidad }, { new: true });
-//             res.json({ elementoInventarioActualizado });
-//         } catch (error) {
-//             res.status(400).json({ error: "No se pudo actualizar el elemento del inventario" });
-//         }
-//     },
-//     // Consulta para obtener el total del inventario (multiplicando cantidad por valor)
-//     getTotalInventario: async (req, res) => {
-//         try {
-//             const elementosInventario = await Inventario.find();
-//             const total = elementosInventario.reduce((acc, curr) => acc + curr.valor * curr.cantidad, 0);
-//             res.json({ total });
-//         } catch (error) {
-//             res.status(500).json({ error: "Error al obtener el total del inventario" });
-//         }
-//     }
-// };
-
-// export default httpInventario;
+export default httpsInventario;
