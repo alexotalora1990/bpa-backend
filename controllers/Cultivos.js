@@ -42,7 +42,7 @@ const httpsCultivos= {
     postCultivo: async (req, res) => {
       try {
         const { idparcela,nombre,tipo } = req.body;
-        const cultivo = new Finca({ idparcela,nombre,tipo });
+        const cultivo = new Cultivo({ idparcela,nombre,tipo });
         await cultivo.save();
         res.status(201).json({ cultivo });
       } catch (error) {
