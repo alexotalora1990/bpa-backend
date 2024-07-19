@@ -64,6 +64,7 @@ router.put("/activar/:id",[
     check("id","ID de finca invalido").isMongoId(),
     check("id").custom(helpersFincas.validarExistaIdFinca),
 ], httpFincas.putFincaActivar);
+
 router.put("/desactivar/:id",[
     check("id","ID de finca invalido").isMongoId(),
     check("id").custom(helpersFincas.validarExistaIdFinca),
