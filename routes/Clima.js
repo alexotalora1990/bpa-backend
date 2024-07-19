@@ -1,28 +1,42 @@
 import { Router } from "express";
-  
+import { check } from 'express-validator';
+import httpsClima from '../controllers/Clima.js'
+import helpersClima from '../helpers/Clima.js'
+import helpersFincas from "../helpers/Fincas.js";
+import helpersEmpleado from "../helpers/Empleados.js";
+import { validarCampos } from '../middleware/validar-campos.js';
+
 const router = Router();
 
-router.get("/", httpClimas.getClimas);
+router.get("/", httpsClima.getClima);
 
-router.get("/climas/:id", httpClimas.getClimasID);
+router.get("/clima/:id", [
+    check('id', 'No es un ID válido').isMongoId(),
+    check('id').custom(helpersClima.validarExistaIdClima),
+    validarCampos
+], httpsClima.getClimaID);
 
-router.get("/activos", httpClimas.getClimasActivos);
 
-router.get("/desactivados", httpClimas.getClimasInactivos);
 
-router.get("/fechas/", httpClimas.getClimas);
+router.post("/agregar", [
+    check('idfinca', 'El id de la finca no es correcto').isMongoId(),
+    check('idfinca').custom(helpersFincas.validarExistaIdFinca),
+    check('idempleado', 'El id del empleado es obligatorio').isMongoId(),
+    check('idempleado').custom(helpersEmpleado.validarExistaIdEmpleados),
 
-router.get("/temperatura/", httpClimas.getClimas);
+    check('horaInicio', 'La hora de inicio es obligatoria').notEmpty(),
+    check('horaFinal', 'La hora Final es obligatoria').notEmpty(),
+    check('tempMax', 'La temperatura Maxima es obligatoria').notEmpty(),
+    check('tempMin', 'La temperatura Minima es obligatoria').notEmpty(),
+    validarCampos
+], httpsClima.postClima);
 
-router.get("/duracion/", httpClimas.getClimas);
+router.put("/actualizar/:id", [
+    check('id', 'No es un ID válido').isMongoId(),
+    check('id').custom(helpersClima.validarExistaIdClima),
+   
+], httpsClima.getClima);
 
-router.get("/tipoclima/", httpClimas.getClimas);
 
-router.post("/agregar",[], httpClimas.postClimas);
-
-router.put("/actualizar",[], httpClimas.putClimas);
-
-router.put("activar/:id", httpClimas.putClimasActivar);
-router.put("desactivar/:id", httpClimas.putClimasDesactivar);
 
 export default router;
