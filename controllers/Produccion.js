@@ -41,8 +41,8 @@ const httpProduccion= {
       },
     postProduccion: async (req, res) => {
         try {
-            const { idcultivo,numlote, especie,cantidad,cantidadTrabajadores,obsrvaciones } = req.body;
-            const nuevaProduccion = new Produccion({idcultivo,numlote, especie,cantidad,cantidadTrabajadores,obsrvaciones });
+            const { idcultivo,Numlote, especie,cantidad,cantidadTrabajadores,observaciones } = req.body;
+            const nuevaProduccion = new Produccion({idcultivo,Numlote, especie,cantidad,cantidadTrabajadores,observaciones });
             await nuevaProduccion.save();
             res.status(201).json({ nuevaProduccion });
         } catch (error) {
@@ -76,7 +76,7 @@ const httpProduccion= {
     putProduccionDesactivar: async (req, res) => {
         try {
           const { id } = req.params;
-          const produccionDesactivada= await Produccionn.findByIdAndUpdate(id, { estado: 0 }, { new: true });
+          const produccionDesactivada= await Produccion.findByIdAndUpdate(id, { estado: 0 }, { new: true });
           if (!produccionDesactivada) {
             return res.status(404).json({ message: "Produccion no encontrada" });
           }

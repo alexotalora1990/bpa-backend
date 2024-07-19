@@ -10,5 +10,5 @@ const produccionSchema = new mongoose.Schema({
     observaciones:{type: String,required:true},
     estado:{type:Number,default:1}
 })
-
-export default mongoose.model("Produccion", produccionSchema)
+ 
+export default mongoose.model("Produccion", produccionSchema) 

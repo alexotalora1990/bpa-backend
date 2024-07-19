@@ -43,19 +43,20 @@ validarCampos,
 
 ], httpsCultivos.postCultivo);
 
-router.put("/actualizar",[
+router.put("/actualizar/:id",[
     check("id", "ID de Analisis de Suelo inválido").isMongoId(),
     check("id").custom(helpersCultivo.validarExistaIdcultivo),
     validarCampos,
    ], httpsCultivos.putCultivo);
 
-router.put("activar/:id",[
+router.put("/activar/:id",[
     check("id", "ID de Analisis de Suelo inválido").isMongoId(),
     check("id").custom(helpersCultivo.validarExistaIdcultivo),
     validarCampos,
     
 ], httpsCultivos.putActivarCultivo);
-router.put("desactivar/:id",[
+
+router.put("/desactivar/:id",[
     check("id", "ID de Analisis de Suelo inválido").isMongoId(),
     check("id").custom(helpersCultivo.validarExistaIdcultivo),
     validarCampos,
