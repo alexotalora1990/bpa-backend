@@ -48,7 +48,7 @@ router.put("/actualizar/:id",[
     check("telefono", "el telefono es requerido").notEmpty(),
     check("municipio", "el municipio es requerido").notEmpty(),
     check("rol", "El rol es requerido").notEmpty(),
-    validarCampos,
+    validarCampos, 
 ], httpAdmin.putAdmin);
 
 //activar y desactivar
