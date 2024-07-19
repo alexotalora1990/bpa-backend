@@ -7,9 +7,8 @@ const climaSchema=new mongoose.Schema({
     tipo:{type:String,required:true},
     horaInicio:{type:String,required:true},
     horaFinal:{type:String},
-    tempMin:{type:Number,required:true},
-    tempMax:{type:Number,required:true},
-    estado:{type:Number,default:1}
+    tempMin:{type:Number,required:true}, 
+    tempMax:{type:Number,required:true}
 })
 
 export default mongoose.model("Clima",climaSchema)

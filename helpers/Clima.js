@@ -1,8 +1,12 @@
-// import mongoose from "mongoose";
+import Clima from "../models/Clima.js"
 
-// const climaSchema=new mongoose.Schema({
+    const helpersClima  = {
+        validarExistaIdClima :async (id)=>{
+            const existe = await Clima .findById(id)
+            if (existe==undefined){
+                throw new Error ("Id de clima  no existe")
+            }
+        }
+}
 
-
-// })
-
-// export default mongoose.model("Clima",climaSchema)
+export default helpersClima
