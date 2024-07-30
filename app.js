@@ -11,6 +11,13 @@ import proveedor from "./routes/Proveedores.js"
 import parcelas from "./routes/Parcelas.js"
 import analisisSuelo from "./routes/AnalisisSuelo.js"
 
+import cultivos from "./routes/Cultivos.js"
+import analisisSuelos from "./routes/AnalisisSuelo.js"
+import procesos from "./routes/Procesos.js"
+import produccion from "./routes/Produccion.js"
+
+// actualizacion
+
 
 const app = express()
 app.use(cors())
@@ -26,6 +33,11 @@ app.use("/api/proveedor",proveedor)
 app.use("/api/parcela",parcelas)
 app.use("/api/preparacionSuelo",preparacionSuelo)
 app.use("/api/analisis",analisisSuelo)
+app.use("/api/cultivo",cultivos)
+app.use("/api/analisisSuelo",analisisSuelos)
+app.use("/api/procesos",procesos)
+app.use("/api/produccion",produccion)
+
 
 
 

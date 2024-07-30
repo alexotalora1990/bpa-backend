@@ -14,35 +14,34 @@ import helpersEmpleado from "../helpers/Empleados.js";
 const router = Router();
 
 router.get("/",[
-    validarJWT,
+    // validarJWT,
 ], httpsAnalisisSuelo.getAnalisisSuelo);
 
 router.get("/:id",[
     check("id", "ID de Analisis de Suelo inválido").isMongoId(),
     check("id").custom(helpersAnalisisSuelo.validarExistaIdAnalisisSuelo),
     validarCampos,
-    validarJWT,
+    // validarJWT,
 ], httpsAnalisisSuelo.getAnalisisSueloID);
 
-router.get("/obtener/activos",[
-    validarJWT,
+router.get("/obtener/activos",[ 
 ],httpsAnalisisSuelo.getAnalisisSueloActivos);
 
 router.get("/obtener/desactivados",[
-    validarJWT,
-],httpsAnalisisSuelo.getAnalisisSueloActivos);
+    // validarJWT,
+],httpsAnalisisSuelo.getAnalisisSueloInactivos);
 
 
 router.get("/fechas",[
-    validarJWT,
+    // validarJWT,
 ],httpsAnalisisSuelo.getAnalisisSuelo);
 
 router.get("/porcentaje",[
-    validarJWT,
+    // validarJWT,
 ],httpsAnalisisSuelo.getAnalisisSuelo);
 
 router.get("/responsable",[
-    validarJWT,
+    // validarJWT,
 ],httpsAnalisisSuelo.getAnalisisSuelo);
 
 router.post("/agregar",[
@@ -59,26 +58,26 @@ check("resultados","Resultados no debe estar vacio").notEmpty(),
 check("idparcela").custom(helpersParcelas.validarExistaIdParcela),
 check("idempleado").custom(helpersEmpleado.validarExistaIdEmpleados),
 validarCampos,
-validarJWT,
+// validarJWT,
 ], httpsAnalisisSuelo.postAnalisisSuelo);
 
-router.put("/actualizar",[
+router.put("/actualizar/:id",[
     check("id", "ID de Analisis de Suelo inválido").isMongoId(),
     check("id").custom(helpersAnalisisSuelo.validarExistaIdAnalisisSuelo),
     validarCampos,
-    validarJWT,
+    // validarJWT,
 ], httpsAnalisisSuelo.putAnalisisSuelo);
-router.put("activar/:id",[
+router.put("/activar/:id",[
     check("id", "ID de Analisis de Suelo inválido").isMongoId(),
     check("id").custom(helpersAnalisisSuelo.validarExistaIdAnalisisSuelo),
     validarCampos,
-    validarJWT,
+    // validarJWT,
 ], httpsAnalisisSuelo.putActivarAnalisisSuelo);
-router.put("desactivar/:id",[
+router.put("/desactivar/:id",[
     check("id", "ID de Analisis de Suelo inválido").isMongoId(),
     check("id").custom(helpersAnalisisSuelo.validarExistaIdAnalisisSuelo),
     validarCampos,
-    validarJWT,
+    // validarJWT,
 ], httpsAnalisisSuelo.putDesactivarAnalisisSuelo);
 
 export default router;
