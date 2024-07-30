@@ -54,14 +54,14 @@ router.put("/actualizar/:id",[
 //activar y desactivar
 
 router.put("/activar/:id",[
-    validarJWT,
+    // validarJWT,
     check("id", "ID de ADMIN inválido").isMongoId(),
     check("id").custom(helpersAdmin.validarExistaIdAdministrador),
     validarCampos,
 ],httpAdmin.putAdminActivar);
 
 router.put("/desactivar/:id",[
-    validarJWT,
+    // validarJWT,
     check("id", "ID de ADMIN inválido").isMongoId(),
     check("id").custom(helpersAdmin.validarExistaIdAdministrador),
     validarCampos,
