@@ -9,6 +9,8 @@ import preparacionSuelo from "./routes/PreparacionSuelo.js"
 import empleados from "./routes/Empleados.js"
 import proveedor from "./routes/Proveedores.js"
 import parcelas from "./routes/Parcelas.js"
+import analisisSuelo from "./routes/AnalisisSuelo.js"
+
 
 const app = express()
 app.use(cors())
@@ -23,6 +25,7 @@ app.use("/api/empleado",empleados)
 app.use("/api/proveedor",proveedor)
 app.use("/api/parcela",parcelas)
 app.use("/api/preparacionSuelo",preparacionSuelo)
+app.use("/api/analisis",analisisSuelo)
 
 
 
