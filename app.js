@@ -14,6 +14,8 @@ import analisisSuelos from "./routes/AnalisisSuelo.js"
 import procesos from "./routes/Procesos.js"
 import produccion from "./routes/Produccion.js"
 
+// actualizacion
+
 
 const app = express()
 app.use(cors())
