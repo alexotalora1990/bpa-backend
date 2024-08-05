@@ -3,7 +3,7 @@ import { check } from 'express-validator';
 import  {validarCampos } from '../middleware/validar-campos.js';
 import httpsPreparacionSuelos from '../controllers/PreparacionSuelo.js';
 import helpersPreparacionSuelo from '../helpers/PreparacionSuelo.js';
-import helpersParcelas from "../helpers/parcelas.js";
+import helpersParcelas from "../helpers/Parcelas.js";
 import helpersEmpleado from "../helpers/Empleados.js";
 
 const router = Router();
