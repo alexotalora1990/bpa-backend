@@ -8,14 +8,14 @@ import helpersEmpleado from "../helpers/Empleados.js";
 
 const router = Router();
 
-router.get("/", httpNomina.getNominas);
+router.get("/", httpsNomina.getNominas);
 router.get("/nomina/:id",[
     check("id","ID de nomina invalido").isMongoId(),
     check("id").custom(helpersNomina.validarExistaIdNomina),
     validarCampos
-],httpNomina.getNominaID);
-router.get("/activos", httpNomina.getNominaActivos);
-router.get("/desactivados", httpNomina.getNominaInactivos);
+],httpsNomina.getNominaID);
+router.get("/activos", httpsNomina.getNominaActivos);
+router.get("/desactivados", httpsNomina.getNominaInactivos);
 // router.get("/fechas", httpNomina.getNomina);
 // router.get("/empleado", httpNomina.getNomina);
 // router.get("/nomina", httpNomina.getNomina);
@@ -26,18 +26,18 @@ router.post("/agregar",[
     check("valor","El valor es requerido").notEmpty(),
     check("valor","El valor debe ser numerico").isNumeric(),
     check("idempleados").custom(helpersEmpleado.validarExistaIdEmpleados),
-], httpNomina.postNomina);
+], httpsNomina.postNomina);
 router.put("/actualizar/:id",[
     check("fecha","La fecha es requerida").notEmpty(),
     check("tipo","El tipo de nomina es requerido").notEmpty(),
     check("valor","El valor es requerido").notEmpty(),
     check("valor","El valor debe ser numerico").isNumeric(),
     check("idempleados").custom(helpersEmpleado.validarExistaIdEmpleados),
-], httpNomina.putNomina);
+], httpsNomina.putNomina);
 
 
 router.put("/activar/:id", httpsNomina.putNominaActivar);
 router.put("/desactivar/:id", httpsNomina.putNominaDesactivar);
-router.put("/actualizar",[], httpNomina.putNomina);
+router.put("/actualizar",[], httpsNomina.putNomina);
 
 export default router;

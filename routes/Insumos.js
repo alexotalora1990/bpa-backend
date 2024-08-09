@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { check } from 'express-validator';
-import httpsInsumo from "../controllers/Insumo.js";
+import httpsInsumo from "../controllers/Insumos.js";
 import helpersInsumo from "../helpers/Insumos.js"
 import helpersProveedor from "../helpers/Proveedores.js"
 import { validarCampos } from '../middleware/validar-campos.js';

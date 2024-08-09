@@ -12,7 +12,7 @@ router.get("/", httpsControlPlagas.getControlPlagas);
 
 router.get("/controlPlagas/:id", [
     check('id', 'No es un ID valido').isMongoId(),
-    check("id".custom(helpersControlPlagas.validarExistaIdControlPlagas)),
+    check("id").custom(helpersControlPlagas.validarExistaIdControlPlagas),
     validarCampos
 ], httpsControlPlagas.getControlPlagaID);
 
@@ -22,11 +22,11 @@ router.get("/desactivados", httpsControlPlagas.getControlPlagasInactivos);
 
 router.post("/agregar", [
     check('idcultivo', 'El idcultivo es obligatorio').isMongoId(),
-    check("idcultivo".custom(helpersCultivo.validarExistaIdcultivo)),
+    check("idcultivo").custom(helpersCultivo.validarExistaIdcultivo),
     check('idempleado', 'El idempleado es obligatorio').isMongoId(),
-    check("idempleado".custom(helpersEmpleado.validarExistaIdEmpleados)),
+    check("idempleado").custom(helpersEmpleado.validarExistaIdEmpleados),
     check('idoperario', 'El idoperario es obligatorio').isMongoId(),
-    check("idoperario".custom(helpersEmpleado.validarExistaIdEmpleados)),
+    check("idoperario").custom(helpersEmpleado.validarExistaIdEmpleados),
     check('nombre', 'El nombre es obligatorio y debe tener al menos 4 caracteres').isString().isLength({ min: 4 }),
     check('ingredienteActivo', 'El ingrediente activo es obligatorio').isString(),
     check('dosis', 'La dosis es obligatoria y debe ser un numero').isNumeric(),
@@ -35,11 +35,11 @@ router.post("/agregar", [
 
 router.put("/actualizar/:id", [
     check('id', 'No es un ID válido').isMongoId(),
-    check("idcultivo".custom(helpersCultivo.validarExistaIdcultivo)),
+    check("idcultivo").custom(helpersCultivo.validarExistaIdcultivo),
     check('idempleado', 'El idempleado es obligatorio').isMongoId(),
-    check("idempleado".custom(helpersEmpleado.validarExistaIdEmpleados)),
+    check("idempleado").custom(helpersEmpleado.validarExistaIdEmpleados),
     check('idoperario', 'El idoperario es obligatorio').isMongoId(),
-    check("idoperario".custom(helpersEmpleado.validarExistaIdEmpleados)),
+    check("idoperario").custom(helpersEmpleado.validarExistaIdEmpleados),
     check('nombre', 'El nombre debe tener al menos 4 caracteres').optional().isString().isLength({ min: 4 }),
     check('ingredienteActivo', 'El ingrediente activo es obligatorio').optional().isString(),
     check('dosis', 'La dosis debe ser un numero').optional().isNumeric(),

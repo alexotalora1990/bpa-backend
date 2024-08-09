@@ -1,4 +1,4 @@
-import Siembra from '../models/siembra.js';
+import Siembra from '../models/Siembra.js';
 import moongose from "mongoose"
 
 const httpSiembras = { 

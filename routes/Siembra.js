@@ -32,7 +32,7 @@ router.get("/listarXFechas", httpSiembras.getSiembrasByFechas); //ya
 
 router.get("/listarXEmpleados/:id", httpSiembras.getSiembrasByEmpleado); //ya
 
-router.get("listarXcultivoPrevio",httpSiembras.getSiembrasByCultivoPrevio)
+// router.get("listarXcultivoPrevio",httpSiembras.getSiembrasByCultivoPrevio)
 
 router.get("/estado/:estado", [
     check("estado", "El estado debe ser un numero valido").isNumeric(),
