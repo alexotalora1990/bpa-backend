@@ -1,4 +1,4 @@
-import Fertilizacion from "../models/Fertilizacion";
+import Fertilizacion from "../models/Fertilizacion.js";
 
 const httpFertilizacion= {
     getFertilizacion: async (req,res) => {

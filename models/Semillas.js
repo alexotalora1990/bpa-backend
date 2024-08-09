@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 
 const semillaSchema = new mongoose.Schema({
     idproveedores: { type: mongoose.Schema.Types.ObjectId, ref: 'Proveedores', required: true },
-    numFactura:{type: number,required:true},
+    numFactura:{type: Number,required:true},
     fechaCompra:{type: Date,required:true},
     fechaVencimiento:{type: Date,required:true},
     especie:{type: String,required:true},
