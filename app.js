@@ -26,6 +26,9 @@ import semillas from "./routes/Semillas.js"
 import riegos from "./routes/Riego.js"
 import siembras from "./routes/Siembra.js"
 import nominas from "./routes/Nomina.js"
+import maquinarias from "./routes/MaquinariaHerramientas.js"
+// import mantenimientos from "./routes/Mantenimientos.js"
+import inventarios from "./routes/Inventarios.js"
 
 // actualizacion
 
@@ -50,8 +53,10 @@ app.use("/api/procesos",procesos)
 app.use("/api/produccion",produccion)
 app.use ("/api/controlPlagas",controlPlagas)
 app.use("/api/clima",clima)
+
 app.use("api/comprador",comprador)
 app.use("/api/elaboracionSustrato",elaboracionSustrato)
+
 app.use("/api/factura",factura)
 app.use("/api/fertilizacion", fertilizacion)
 app.use("/api/gastos",gastos)
@@ -60,7 +65,9 @@ app.use("/api/semillas", semillas)
 app.use("/api/riego", riegos)
 app.use(".api/siembra",siembras)
 app.use("/api/nomina", nominas)
-
+app.use("/api/maquinaria",maquinarias)
+// app.use("/api/mantenimientos",mantenimientos)
+app.use("/api/inventarios", inventarios)
 
 
 

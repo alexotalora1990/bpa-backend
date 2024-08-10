@@ -8,7 +8,6 @@ const insumoSchema = new mongoose.Schema({
     unidad:{type:String,required:true},
     responsable:{type:String,required:true},
     observaciones:{type:String,required:true},
-    cantidad:{type:Number,required:true},
     total:{type:Number,required:true}, 
     estado:{type:Number,default:1}
 })

@@ -1,4 +1,4 @@
-import Proveedor from "../models/Empleados.js"
+import Proveedor from "../models/Proveedores.js"
 
     const helpersProveedor = {
         validarExistaIdProveedor:async (id)=>{

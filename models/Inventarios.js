@@ -5,9 +5,9 @@ const inventarioSchema = new mongoose.Schema({
     observacion:{type:String,required:true},
     unidad:{type:String,required:true},
     cantidad:{type:Number,required:true},
-    idsemillas:{type:mongoose.Schema.Types.ObjectId,required:true,ref:"Semilla"},
-    idinsumos:{type:mongoose.Schema.Types.ObjectId,required:true,ref:"Insumo"},
-    idmaquinaria:{type:mongoose.Schema.Types.ObjectId,required:true,ref:"Maquinaria"},
+    idsemillas:{type:mongoose.Schema.Types.ObjectId, ref:"Semilla"},
+    idinsumos:{type:mongoose.Schema.Types.ObjectId,ref:"Insumo"},
+    idmaquinaria:{type:mongoose.Schema.Types.ObjectId,ref:"Maquinaria"},
     estado:{type:Number,default:1}
 })
 

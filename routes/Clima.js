@@ -26,8 +26,8 @@ router.post("/agregar", [
 
     check('horaInicio', 'La hora de inicio es obligatoria').notEmpty(),
     check('horaFinal', 'La hora Final es obligatoria').notEmpty(),
-    check('tempMax', 'La temperatura Maxima es obligatoria').notEmpty(),
-    check('tempMin', 'La temperatura Minima es obligatoria').notEmpty(),
+    // check('tempMax', 'La temperatura Maxima es obligatoria').notEmpty(),
+    // check('tempMin', 'La temperatura Minima es obligatoria').notEmpty(),
     validarCampos
 ], httpsClima.postClima);
 
@@ -35,7 +35,7 @@ router.put("/actualizar/:id", [
     check('id', 'No es un ID válido').isMongoId(),
     check('id').custom(helpersClima.validarExistaIdClima),
    
-], httpsClima.getClima);
+], httpsClima.putClima);
 
 
 

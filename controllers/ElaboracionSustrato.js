@@ -43,8 +43,8 @@ const httpsElaboracionSustrato = {
     },
     postElaboracion: async (req, res) => {
         try {
-            const { idproceso, productocomercial, ingredienteActivo, dosisUtilizada, MetodoAplicacion, idempleadooperario, idempleadoresponsable } = req.body;
-            const elaboracion = new ElaboracionSustrato({ idproceso, productocomercial, ingredienteActivo, dosisUtilizada, MetodoAplicacion, idempleadooperario, idempleadoresponsable });
+            const { idproceso, productocomercial, ingredienteActivo, dosisUtilizada, metodoAplicacion, idempleadooperario, idempleadoresponsable } = req.body;
+            const elaboracion = new ElaboracionSustrato({ idproceso, productocomercial, ingredienteActivo, dosisUtilizada, metodoAplicacion, idempleadooperario, idempleadoresponsable });
             await elaboracion.save();
             res.json({ message: 'Elaboración de sustrato creada satisfactoriamente', elaboracion });
         } catch (error) {
@@ -55,8 +55,12 @@ const httpsElaboracionSustrato = {
     putElaboracion: async (req, res) => {
         const { id } = req.params;
         try {
-            const elaboracion = await ElaboracionSustrato.findByIdAndUpdate(id, req.body, { new: true });
-            res.json({ elaboracion });
+            // const elaboracion = await ElaboracionSustrato.findByIdAndUpdate(id, req.body, { new: true });
+            // res.json({ elaboracion });
+            const { id } = req.params;
+            const { idempleadooperario, ...resto } = req.body;
+            const sustrato= await ElaboracionSustrato.findByIdAndUpdate(idempleadooperario, resto, { new: true });
+            res.json({ sustrato });
         } catch (error) {
             console.error('Error al actualizar elaboración de sustrato:', error);
             res.status(400).json({ message: 'No se pudo actualizar la elaboración de sustrato' });
