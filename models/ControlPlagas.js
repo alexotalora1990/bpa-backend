@@ -7,7 +7,7 @@ const ControlPlagaSchema=new mongoose.Schema({
     createdAt:{type:Date,default:Date.now},
     nombre:{type:String,required:true,minlenght:4},
     ingredienteActivo:{type:String,required:true},
-    dosis:{type:Number,required:true},
+    dosis:{type:String,required:true},
     observaciones:{type:String},
     estado:{type:Number,default:1}
 })

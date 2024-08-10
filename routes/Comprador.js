@@ -15,9 +15,9 @@ router.get("/comprador/:id", [
     validarCampos
 ], httpsComprador.getCompradorID);
 
-router.get("/activos", httpsComprador.getCompradoresActivos);
+router.get("/obtener/activos", httpsComprador.getCompradoresActivos);
 
-router.get("/desactivados", httpsComprador.getCompradoresInactivos);
+router.get("/obtener/desactivados", httpsComprador.getCompradoresInactivos);
 
 router.post("/agregar", [
     check('idproduccion', 'El id de la producción es obligatorio').isMongoId(),
