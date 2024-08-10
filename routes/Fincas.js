@@ -37,7 +37,7 @@ router.post("/agregar",[
     check("area", "El area es requerida").notEmpty(),
     check("departamento", "Departamento es requerido").notEmpty(),
     check("ciudad", "Ciudad es requerida").notEmpty(),
-    check("limites", "El area es requerida").notEmpty(),
+    check("limites", "Los limites son requeridos").notEmpty(),
 
 validarCampos,
 ], httpFincas.postFinca);
@@ -53,7 +53,7 @@ router.put("/actualizar/:id",[
     check("area", "El area es requerida").notEmpty(),
     check("departamento", "Departamento es requerido").notEmpty(),
     check("ciudad", "Ciudad es requerida").notEmpty(),
-    check("limites", "El area es requerida").notEmpty(),
+    check("limites", "Los limites son requeridos").notEmpty(),
     check("id","ID de finca invalido").isMongoId(),
     check("id").custom(helpersFincas.validarExistaIdFinca),
 validarCampos,

@@ -3,8 +3,9 @@ import Finca from "../models/Fincas.js"
 const httpFincas= {
     getFincas: async (req,res) => {
         try {
-            const fincas = await Finca.find();
-            res.json({ fincas });
+            const fincas = await Finca.find()
+            .populate("idadministrador")
+            res.json({ fincas })
         } catch (error) {
             res.status(500).json({ error: "Error al obtener los fincas" });
         }
@@ -23,7 +24,8 @@ const httpFincas= {
     },
     getFincasActivas: async (req, res) => {
         try {
-          const fincaActiva = await Finca.find({ estado: 1});
+          const fincaActiva = await Finca.find({ estado: 1})
+          .populate("idadministrador")
           res.json({ fincaActiva });
              } catch (error) {
           console.log(error);
