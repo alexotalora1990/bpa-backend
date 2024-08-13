@@ -3,8 +3,6 @@ import { check } from 'express-validator';
 
 import { validarCampos } from '../middleware/validar-campos.js';
 import {validarJWT } from '../middleware/validar-jwts.js'
-
-
  import httpsCultivos from "../controllers/Cultivos.js"
  import helpersCultivo from "../helpers/Cultivos.js"
  import helpersParcelas from "../helpers/Parcelas.js"
