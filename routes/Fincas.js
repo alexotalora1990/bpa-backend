@@ -1,6 +1,5 @@
 import { Router } from "express";
 import { check } from 'express-validator';
-
 import httpFincas from "../controllers/Fincas.js";
 import  {validarCampos } from '../middleware/validar-campos.js';
 import helpersFincas from "../helpers/Fincas.js";
@@ -54,8 +53,8 @@ router.put("/actualizar/:id",[
     check("departamento", "Departamento es requerido").notEmpty(),
     check("ciudad", "Ciudad es requerida").notEmpty(),
     check("limites", "Los limites son requeridos").notEmpty(),
-    check("id","ID de finca invalido").isMongoId(),
-    check("id").custom(helpersFincas.validarExistaIdFinca),
+    check("idadministrador","ID de finca invalido").isMongoId(),
+    check("idadministrador").custom(helpersAdmin.validarExistaIdAdministrador),
 validarCampos,
 ], httpFincas.putFinca);
 

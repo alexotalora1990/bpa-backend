@@ -55,8 +55,8 @@ const httpFincas= {
     putFinca: async (req, res) => {
         try {
             const { id } = req.params;
-            const { area, nombre,rut, direccion, ubicaion,departamento,ciudad,limites  } = req.body;
-            const fincaActualizada = await Finca.findByIdAndUpdate(id, { area, nombre,rut, direccion, ubicaion,departamento,ciudad,limites  }, { new: true });
+            const { area, nombre,rut, direccion, ubicaion,departamento,ciudad,limites, idadministrador } = req.body;
+            const fincaActualizada = await Finca.findByIdAndUpdate(id, { area, nombre,rut, direccion, ubicaion,departamento,ciudad,limites, idadministrador  }, { new: true });
             res.json({ fincaActualizada });
         } catch (error) {
             res.status(400).json({ error: "No se pudo actualizar la finca" });
