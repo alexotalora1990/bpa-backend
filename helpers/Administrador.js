@@ -12,7 +12,13 @@ import Administrador from "../models/Administrador.js"
             if(unico){
                 throw new Error ("Correo Existe")
             }
-        }
+        },
+        validarTelefonoUnico:async (telefono) =>{
+            const unico = await Administrador.findOne({telefono})
+            if(unico){
+                throw new Error ("Telefono Existe")
+            }
+        },
 }
 
 export default helpersAdmin 
