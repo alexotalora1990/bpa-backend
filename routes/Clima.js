@@ -23,7 +23,6 @@ router.post("/agregar", [
     check('idfinca').custom(helpersFincas.validarExistaIdFinca),
     check('idempleado', 'El id del empleado es obligatorio').isMongoId(),
     check('idempleado').custom(helpersEmpleado.validarExistaIdEmpleados),
-
     check('horaInicio', 'La hora de inicio es obligatoria').notEmpty(),
     check('horaFinal', 'La hora Final es obligatoria').notEmpty(),
     // check('tempMax', 'La temperatura Maxima es obligatoria').notEmpty(),

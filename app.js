@@ -54,7 +54,7 @@ app.use("/api/produccion",produccion)
 app.use ("/api/controlPlagas",controlPlagas)
 app.use("/api/clima",clima)
 
-app.use("api/comprador",comprador)
+app.use("/api/comprador",comprador)
 app.use("/api/elaboracionSustrato",elaboracionSustrato)
 
 app.use("/api/factura",factura)

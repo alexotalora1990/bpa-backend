@@ -25,6 +25,7 @@ router.post("/agregar", [
     check("correo").custom(helpersAdmin.validarCorreoUnico), 
     check("contrasena", "La contraseña es requerida").notEmpty(),
     check("telefono", "el telefono es requerido").notEmpty(),
+    check("telefono").custom(helpersAdmin.validarTelefonoUnico), 
     check("municipio", "el municipio es requerido").notEmpty(),
     check("rol", "El rol es requerido").notEmpty(),
     validarCampos,

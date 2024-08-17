@@ -3,7 +3,8 @@ import Parcela from "../models/Parcelas.js"
 const httpsParcelas = {
   getParcelas: async (req, res) => {
     try {
-      const parcelas = await Parcela.find();
+      const parcelas = await Parcela.find()
+      
       res.json({ parcelas });
     } catch (error) {
       res.status(500).json({ error: "Error al obtener los parcelas" });
@@ -23,7 +24,8 @@ const httpsParcelas = {
   },
   getParcelasActivas: async (req, res) => {
     try {
-      const parcelaActiva = await Parcela.find({ estado: 1 });
+      const parcelaActiva = await Parcela.find({ estado: 1 })
+      .populate("idfincas")
       res.json({ parcelaActiva });
     } catch (error) {
       console.log(error);
