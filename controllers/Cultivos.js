@@ -3,7 +3,7 @@ import Cultivo from "../models/Cultivo.js"
 const httpsCultivos= {
     getCultivos: async (req,res) => {
         try {
-            const cultivo = await Cultivo.find();
+            const cultivo = await Cultivo.find().populate('idparcela');
             res.json({ cultivo });
         } catch (error) {
             res.status(500).json({ error: "Error al obtener los cultivos" });
