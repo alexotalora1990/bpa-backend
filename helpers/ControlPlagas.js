@@ -1,4 +1,4 @@
-import ControlPlagas from "../models/Empleados.js"
+import ControlPlagas from "../models/ControlPlagas.js"
 
     const helpersControlPlagas = {
         validarExistaIdControlPlagas:async (id)=>{

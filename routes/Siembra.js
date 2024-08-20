@@ -12,6 +12,28 @@ const router = Router();
 
 router.get("/", httpsSiembra.getSiembras);
 
+
+router.get("/siembra/:id", [
+    check('id', 'No es un ID válido').isMongoId(),
+    check('id').custom(helpersSiembra.validarExistaIdSiembra),
+    validarCampos
+], httpsSiembra.getSiembraID);
+
+router.get("/activas", httpsSiembra.getSiembrasActivas);
+
+
+router.get("/inactivas", httpsSiembra.getSiembrasInactivas);
+
+router.get("/listarXEmpleados/:id", httpSiembras.getSiembrasByEmpleado); //ya
+
+// router.get("listarXcultivoPrevio",httpSiembras.getSiembrasByCultivoPrevio)
+
+router.get("/estado/:estado", [
+    check("estado", "El estado debe ser un numero valido").isNumeric(),
+    validarCampos,
+], httpSiembras.getSiembrasByEstado); //ya
+
+
 router.get("/siembra/:id", [
     check('id', 'No es un ID válido').isMongoId(),
     check('id').custom(helpersSiembra.validarExistaIdSiembra),
@@ -21,6 +43,8 @@ router.get("/siembra/:id", [
 router.get("/activas", httpsSiembra.getSiembrasActivas);
 
 router.get("/inactivas", httpsSiembra.getSiembrasInactivas);
+
+
 
 router.post("/agregar", [
     check('idcultivos', 'El id de cultivos es obligatorio').isMongoId(),

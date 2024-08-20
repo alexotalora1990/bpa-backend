@@ -1,4 +1,4 @@
-import Riego from "../models/Riego.JS"
+import Riego from "../models/Riego.js"
 
     const helpersRiegos= {
         validarExistaIdRiego:async (id)=>{

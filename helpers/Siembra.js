@@ -4,7 +4,11 @@ import Siembra from "../models/Siembra.js"
         validarExistaIdSiembra:async (id)=>{
             const existe = await Siembra.findById(id)
             if (existe==undefined){
-                throw new Error ("Id de la Siembra no existe")
+
+
+                throw new Error ("Id de siembra no existe")
+
+
             }
         }
 }

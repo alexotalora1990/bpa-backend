@@ -1,4 +1,4 @@
-import Maquinaria from "../models/MaquinariaHerramientas"
+import Maquinaria from "../models/MaquinariaHerramientas.js"
 
     const helpersMaquinaria = {
         validarExistaIdMaquinaria:async (id)=>{
