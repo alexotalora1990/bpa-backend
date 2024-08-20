@@ -1,148 +1,87 @@
-// import Pagos from "../models/pagos.js";
-// import Plan from "../models/plan.js";
-// import mongoose from "mongoose";
+import Mantenimiento from "../models/Mantenimientos.js";
 
-// const httpPagos = {
-// // Obtener todos los pagos
-// getPagos: async (req, res) => {
-//     try {
-//         const pagos = await Pagos.find();
-//         res.json({ pagos });
-//     } catch (error) {
-//         res.status(500).json({ error: "Error al obtener los pagos" });
-//     }
-// },
+const httpsMantenimiento = {
+    getMantenimientos: async (req, res) => {
+        try {
+            const mantenimientos = await Mantenimiento.find()
+            res.json({ mantenimientos });
+        } catch (error) {
+            console.error('Error al obtener los mantenimientos:', error);
+            res.status(500).json({ message: 'Error interno del servidor' });
+        }
+    },
+    getMantenimientoID: async (req, res) => {
+        const { id } = req.params;
+        try {
+            const mantenimiento = await Mantenimiento.findById(id)
+            if (!mantenimiento) {
+                return res.status(404).json({ message: 'Mantenimiento no encontrado' });
+            }
+            res.json({ mantenimiento });
+        } catch (error) {
+            console.error('Error al obtener el mantenimiento por ID:', error);
+            res.status(500).json({ message: 'Error interno del servidor' });
+        }
+    },
+    getMantenimientosActivos: async (req, res) => {
+        try {
+            const mantenimientos = await Mantenimiento.find({ estado: 1 })
+            res.json({ mantenimientos });
+        } catch (error) {
+            console.error('Error al obtener los mantenimientos activos:', error);
+            res.status(500).json({ message: 'Error interno del servidor' });
+        }
+    },
+    getMantenimientosInactivos: async (req, res) => {
+        try {
+            const mantenimientos = await Mantenimiento.find({ estado: 0 })
+            res.json({ mantenimientos });
+        } catch (error) {
+            console.error('Error al obtener los mantenimientos inactivos:', error);
+            res.status(500).json({ message: 'Error interno del servidor' });
+        }
+    },
+    postMantenimiento: async (req, res) => {
+        try {
+            const { idgastos, idherramienta, fecha, verificacionrealizada, responsable, observaciones } = req.body;
+            const mantenimiento = new Mantenimiento({ idgastos, idherramienta, fecha, verificacionrealizada, responsable, observaciones });
+            await mantenimiento.save();
+            res.json({ message: 'Mantenimiento creado satisfactoriamente', mantenimiento });
+        } catch (error) {
+            console.error('Error al crear mantenimiento:', error);
+            res.status(400).json({ message: 'No se pudo crear el mantenimiento' });
+        }
+    },
+    putMantenimiento: async (req, res) => {
+        const { id } = req.params;
+        try {
+            const mantenimiento = await Mantenimiento.findByIdAndUpdate(id, req.body, { new: true });
+            res.json({ mantenimiento });
+        } catch (error) {
+            console.error('Error al actualizar mantenimiento:', error);
+            res.status(400).json({ message: 'No se pudo actualizar el mantenimiento' });
+        }
+    },
+    putMantenimientoActivar: async (req, res) => {
+        const { id } = req.params;
+        try {
+            const mantenimiento = await Mantenimiento.findByIdAndUpdate(id, { estado: 1 }, { new: true });
+            res.json({ mantenimiento });
+        } catch (error) {
+            console.error('Error al activar mantenimiento:', error);
+            res.status(400).json({ message: 'No se pudo activar el mantenimiento' });
+        }
+    },
+    putMantenimientoDesactivar: async (req, res) => {
+        const { id } = req.params;
+        try {
+            const mantenimiento = await Mantenimiento.findByIdAndUpdate(id, { estado: 0 }, { new: true });
+            res.json({ mantenimiento });
+        } catch (error) {
+            console.error('Error al desactivar mantenimiento:', error);
+            res.status(400).json({ message: 'No se pudo desactivar el mantenimiento' });
+        }
+    }
+};
 
-// // Obtener un pago por su ID
-// getPagoByID: async (req, res) => {
-//     try {
-//         const { id } = req.params;
-//         const pago = await Pagos.findById(id);
-//         if (!pago) {
-//             return res.status(404).json({ error: "Pago no encontrado" });
-//         }
-//         res.json({ pago });
-//     } catch (error) {
-//         res.status(500).json({ error: "Error al obtener el pago" });
-//     }
-// },
-
-// // Crear un nuevo pago
-// postPago: async (req, res) => {
-//     try {
-//         const { idCliente, idPlan } = req.body;
-
-//         // Obtener el valor del plan
-//         const plan = await Plan.findById(idPlan);
-//         if (!plan) {
-//             return res.status(404).json({ error: "Plan no encontrado" });
-//         }
-
-//         // Crear el nuevo pago con valor inicial en 0
-//         const nuevoPago = new Pagos({ idCliente, idPlan, valor: 0 });
-        
-//         // Sumar el valor del plan al valor del pago
-//         nuevoPago.valor += plan.valor;
-
-//         await nuevoPago.save();
-//         res.status(201).json({ nuevoPago });
-//     } catch (error) {
-//         res.status(400).json({ error: "No se pudo crear el pago" });
-//     }
-// },
-
-// // Actualizar un pago existente
-// putPago: async (req, res) => {
-//     try {
-//         const { id } = req.params;
-//         const { idCliente, idPlan, valor, estado } = req.body;
-//         const pagoActualizado = await Pagos.findByIdAndUpdate(id, { idCliente, idPlan, valor, estado }, { new: true });
-//         res.json({ pagoActualizado });
-//     } catch (error) {
-//         res.status(400).json({ error: "No se pudo actualizar el pago" });
-//     }
-// },
-
-// // Obtener el total de los pagos realizados dentro de un rango de fechas dado
-// getTotalPagosEntreFechas: async (req, res) => {
-//     try {
-//         const { fechaInicio, fechaFin } = req.query;
-//         const totalPagos = await Pagos.aggregate([
-//             {
-//                 $match: {
-//                     createAt: {
-//                         $gte: new Date(fechaInicio),
-//                         $lte: new Date(fechaFin)
-//                     }
-//                 }
-//             },
-//             {
-//                 $group: {
-//                     _id: null,
-//                     total: { $sum: "$valor" }
-//                 }
-//             }
-//         ]);
-
-//         const total = totalPagos.length > 0 ? totalPagos[0].total : 0;
-
-//         res.json({ total });
-//     } catch (error) {
-//         res.status(500).json({ error: "Error al obtener el total de los pagos" });
-//     }
-// },
-
-// // Obtener el total de los pagos realizados por plan dentro de un rango de fechas dado
-// getTotalPagosPorPlanEntreFechas: async (req, res) => {
-//     try {
-//         const { fechaInicio, fechaFin, idPlan } = req.query;
-
-//         // Crear un objeto de filtro para las fechas
-//         const filtroFechas = {
-//             createAt: {
-//                 $gte: new Date(fechaInicio),
-//                 $lte: new Date(fechaFin)
-//             }
-//         };
-
-//         // Agregar filtro por idPlan si está presente
-//         if (idPlan) {
-//             filtroFechas.idPlan = new mongoose.Types.ObjectId(idPlan);
-//         }
-
-//         // Consulta de agregación para obtener el total de pagos por plan entre fechas
-//         const totalPagosPorPlan = await Pagos.aggregate([
-//             { $match: filtroFechas }, // Aplicar filtro por fechas y/o idPlan
-//             { $group: { _id: "$idPlan", total: { $sum: "$valor" } } }
-//         ]);
-
-//         res.json({ totalPagosPorPlan });
-//     } catch (error) {
-//         console.log(error)
-//         res.status(500).json({ error: "Error al obtener el total de los pagos por plan" });
-//     }
-// },
-
-//  // Obtener el total pagado por cada cliente
-//  getTotalPagosPorCliente: async (req, res) => {
-//     try {
-//         const { idCliente } = req.query;
-
-//         // Crear filtro por idCliente si esta presente
-//         const filtroIdCliente = idCliente ? { idCliente: new mongoose.Types.ObjectId(idCliente) } : {};
-
-//         // Consulta de agregacion para obtener el total de pagos por cliente
-//         const totalPagosPorCliente = await Pagos.aggregate([
-//             { $match: filtroIdCliente }, // Aplicar filtro por idCliente si esta presente
-//             { $group: { _id: "$idCliente", total: { $sum: "$valor" } } }
-//         ]);
-
-//         res.json({ totalPagosPorCliente });
-//     } catch (error) {
-//         res.status(500).json({ error: "Error al obtener el total de los pagos por cliente" });
-//     }
-// }
-
-// };
-
-// export default httpPagos;
+export default httpsMantenimiento;
