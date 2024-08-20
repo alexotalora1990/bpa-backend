@@ -3,8 +3,9 @@ import Finca from "../models/Fincas.js"
 const httpFincas= {
     getFincas: async (req,res) => {
         try {
-            const fincas = await Finca.find();
-            res.json({ fincas });
+            const fincas = await Finca.find()
+            .populate("idadministrador")
+            res.json({ fincas })
         } catch (error) {
             res.status(500).json({ error: "Error al obtener los fincas" });
         }
@@ -23,7 +24,8 @@ const httpFincas= {
     },
     getFincasActivas: async (req, res) => {
         try {
-          const fincaActiva = await Finca.find({ estado: 1});
+          const fincaActiva = await Finca.find({ estado: 1})
+          .populate("idadministrador")
           res.json({ fincaActiva });
              } catch (error) {
           console.log(error);
@@ -53,8 +55,8 @@ const httpFincas= {
     putFinca: async (req, res) => {
         try {
             const { id } = req.params;
-            const { area, nombre,rut, direccion, ubicaion,departamento,ciudad,limites  } = req.body;
-            const fincaActualizada = await Finca.findByIdAndUpdate(id, { area, nombre,rut, direccion, ubicaion,departamento,ciudad,limites  }, { new: true });
+            const { area, nombre,rut, direccion, ubicaion,departamento,ciudad,limites, idadministrador } = req.body;
+            const fincaActualizada = await Finca.findByIdAndUpdate(id, { area, nombre,rut, direccion, ubicaion,departamento,ciudad,limites, idadministrador  }, { new: true });
             res.json({ fincaActualizada });
         } catch (error) {
             res.status(400).json({ error: "No se pudo actualizar la finca" });

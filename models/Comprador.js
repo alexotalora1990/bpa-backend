@@ -2,7 +2,6 @@ import mongoose from "mongoose";
 
 const compradorSchema=new mongoose.Schema({
     idproduccion:{type:mongoose.Schema.Types.ObjectId,ref:'Produccion',required:true},
-    createdAt:{type:Date,default:Date.now},
     especie:{type:String,required:true},
     nombre:{type:String,required:true},
     telefono:{type:String,required:true},
@@ -10,6 +9,7 @@ const compradorSchema=new mongoose.Schema({
     numguiaTransporte:{type:String,required:true},
     numloteComercial:{type:String,required:true},
     valor:{type:Number},
+    createdAt:{type:Date,default:Date.now},
     estado:{type:Number,default:1}
 })
 

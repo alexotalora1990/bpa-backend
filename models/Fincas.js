@@ -5,7 +5,10 @@ const fincaSchema = new mongoose.Schema({
     nombre:{type:String,required:true},
     rut:{type:String,required:true},
     direccion:{type:String,required:true},
-    ubicacion:{type:String,required:true},
+    ubicacion:{
+        latitud:{type:String},
+        longitud:{type:String}
+    },
     area:{type:String,required:true},
     departamento:{type:String,required:true},
     ciudad:{type:String,required:true},

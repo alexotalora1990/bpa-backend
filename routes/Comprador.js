@@ -15,9 +15,9 @@ router.get("/comprador/:id", [
     validarCampos
 ], httpsComprador.getCompradorID);
 
-router.get("/activos", httpsComprador.getCompradoresActivos);
+router.get("/obtener/activos", httpsComprador.getCompradoresActivos);
 
-router.get("/desactivados", httpsComprador.getCompradoresInactivos);
+router.get("/obtener/desactivados", httpsComprador.getCompradoresInactivos);
 
 router.post("/agregar", [
     check('idproduccion', 'El id de la producción es obligatorio').isMongoId(),
@@ -25,9 +25,12 @@ router.post("/agregar", [
     check('especie', 'La especie es obligatoria').isString(),
     check('nombre', 'El nombre es obligatorio').isString(),
     check('telefono', 'El teléfono es obligatorio').isString(),
+    check('telefono').custom(helpersComprador.validarTelefono),
     check('cantidad', 'La cantidad debe ser un número válido').isNumeric(),
     check('numguiaTransporte', 'El número de guía de transporte es obligatorio').isString(),
+    check('numguiaTransporte').custom(helpersComprador.validarNumGuiaTransporte),
     check('numloteComercial', 'El número de lote comercial es obligatorio').isString(),
+    check('numloteComercial').custom(helpersComprador.validarNumLoteComercial),
     check('valor', 'El valor debe ser un número válido').optional().isNumeric(),
     validarCampos
 ], httpsComprador.postComprador);
@@ -40,9 +43,12 @@ router.put("/actualizar/:id", [
     check('especie', 'La especie debe ser un string').optional().isString(),
     check('nombre', 'El nombre debe ser un string').optional().isString(),
     check('telefono', 'El teléfono debe ser un string').optional().isString(),
+    check('telefono').custom(helpersComprador.validarTelefono),
     check('cantidad', 'La cantidad debe ser un número válido').optional().isNumeric(),
     check('numguiaTransporte', 'El número de guía de transporte debe ser un string').optional().isString(),
+    check('numguiaTransporte').custom(helpersComprador.validarNumGuiaTransporte),
     check('numloteComercial', 'El número de lote comercial debe ser un string').optional().isString(),
+    check('numloteComercial').custom(helpersComprador.validarNumLoteComercial),
     check('valor', 'El valor debe ser un número válido').optional().isNumeric(),
     validarCampos
 ], httpsComprador.putComprador);

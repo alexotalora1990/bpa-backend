@@ -5,11 +5,10 @@ const climaSchema=new mongoose.Schema({
     idempleado: {type: mongoose.Schema.Types.ObjectId, ref: 'Empleado', required: true},
     createAt: {type: Date, default: Date.now},
     tipo:{type:String,required:true},
-    horaInicio:{type:String,required:true},
+    horaInicio:{type:String},
     horaFinal:{type:String},
-    tempMin:{type:Number,required:true},
-    tempMax:{type:Number,required:true},
-    estado:{type:Number,default:1}
+    tempMin:{type:Number}, 
+    tempMax:{type:Number}
 })
 
 export default mongoose.model("Clima",climaSchema)

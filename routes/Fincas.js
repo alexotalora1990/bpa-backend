@@ -1,6 +1,5 @@
 import { Router } from "express";
 import { check } from 'express-validator';
-
 import httpFincas from "../controllers/Fincas.js";
 import  {validarCampos } from '../middleware/validar-campos.js';
 import helpersFincas from "../helpers/Fincas.js";
@@ -37,7 +36,7 @@ router.post("/agregar",[
     check("area", "El area es requerida").notEmpty(),
     check("departamento", "Departamento es requerido").notEmpty(),
     check("ciudad", "Ciudad es requerida").notEmpty(),
-    check("limites", "El area es requerida").notEmpty(),
+    check("limites", "Los limites son requeridos").notEmpty(),
 
 validarCampos,
 ], httpFincas.postFinca);
@@ -53,9 +52,9 @@ router.put("/actualizar/:id",[
     check("area", "El area es requerida").notEmpty(),
     check("departamento", "Departamento es requerido").notEmpty(),
     check("ciudad", "Ciudad es requerida").notEmpty(),
-    check("limites", "El area es requerida").notEmpty(),
-    check("id","ID de finca invalido").isMongoId(),
-    check("id").custom(helpersFincas.validarExistaIdFinca),
+    check("limites", "Los limites son requeridos").notEmpty(),
+    check("idadministrador","ID de finca invalido").isMongoId(),
+    check("idadministrador").custom(helpersAdmin.validarExistaIdAdministrador),
 validarCampos,
 ], httpFincas.putFinca);
 
@@ -64,6 +63,7 @@ router.put("/activar/:id",[
     check("id","ID de finca invalido").isMongoId(),
     check("id").custom(helpersFincas.validarExistaIdFinca),
 ], httpFincas.putFincaActivar);
+
 router.put("/desactivar/:id",[
     check("id","ID de finca invalido").isMongoId(),
     check("id").custom(helpersFincas.validarExistaIdFinca),

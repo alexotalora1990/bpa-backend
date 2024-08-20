@@ -25,6 +25,7 @@ router.post("/agregar", [
     check("correo").custom(helpersAdmin.validarCorreoUnico), 
     check("contrasena", "La contraseña es requerida").notEmpty(),
     check("telefono", "el telefono es requerido").notEmpty(),
+    check("telefono").custom(helpersAdmin.validarTelefonoUnico), 
     check("municipio", "el municipio es requerido").notEmpty(),
     check("rol", "El rol es requerido").notEmpty(),
     validarCampos,
@@ -48,20 +49,20 @@ router.put("/actualizar/:id",[
     check("telefono", "el telefono es requerido").notEmpty(),
     check("municipio", "el municipio es requerido").notEmpty(),
     check("rol", "El rol es requerido").notEmpty(),
-    validarCampos,
+    validarCampos, 
 ], httpAdmin.putAdmin);
 
 //activar y desactivar
 
 router.put("/activar/:id",[
-    validarJWT,
+    // validarJWT,
     check("id", "ID de ADMIN inválido").isMongoId(),
     check("id").custom(helpersAdmin.validarExistaIdAdministrador),
     validarCampos,
 ],httpAdmin.putAdminActivar);
 
 router.put("/desactivar/:id",[
-    validarJWT,
+    // validarJWT,
     check("id", "ID de ADMIN inválido").isMongoId(),
     check("id").custom(helpersAdmin.validarExistaIdAdministrador),
     validarCampos,
