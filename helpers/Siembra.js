@@ -5,7 +5,9 @@ import Siembra from "../models/Siembra.js"
             const existe = await Siembra.findById(id)
             if (existe==undefined){
 
+
                 throw new Error ("Id de siembra no existe")
+
 
             }
         }
