@@ -3,17 +3,17 @@ import Parcela from "../models/Parcelas.js"
 const httpsParcelas = {
   getParcelas: async (req, res) => {
     try {
-      const parcelas = await Parcela.find()
-      
-      res.json({ parcelas });
+        const parcelas = await Parcela.find()
+        .populate("idfincas")
+        res.json({parcelas});
     } catch (error) {
-      res.status(500).json({ error: "Error al obtener los parcelas" });
+      res.status(500).json({ error: "Error al obtener las parcelas" });
     }
   },
   getParcelasID: async (req, res) => {
     try {
       const { id } = req.params;
-      const parcelas = await Parcela.parcelaById(id);
+      const parcelas = await Parcela.parcelaById(id)
       if (!parcelas) {
         return res.status(404).json({ error: "Parcela no encontrada" });
       }
@@ -34,7 +34,8 @@ const httpsParcelas = {
   },
   getParcelasInactivas: async (req, res) => {
     try {
-      const parcelaDesactivada = await Parcela.find({ estado: 0 });
+      const parcelaDesactivada = await Parcela.find({ estado: 0 })
+      .populate("idfincas")
       res.json({ parcelaDesactivada });
     } catch (error) {
       console.log(error);

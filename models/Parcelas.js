@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 
 const parcelasSchema = new mongoose.Schema({
-    idfincas:{type:mongoose.Schema.Types.ObjectId,ref:'Fincas',required:true},
+    idfincas:{type:mongoose.Schema.Types.ObjectId,ref:'Finca',required:true},
     numero:{type:Number,required:true},
     ubicacion:{
         latitud:{type:String},
