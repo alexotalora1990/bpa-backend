@@ -10,7 +10,7 @@ import {validarJWT } from '../middleware/validar-jwts.js'
  
 const router = Router();
 
-router.get("/",[
+router.get("/listar",[
     
 ], httpsCultivos.getCultivos);
 
@@ -24,8 +24,8 @@ router.get("/:id",[
 router.get("/obtener/activos",[
     
 ],httpsCultivos.getCultivosActivos);
-
-router.get("/obtener/desactivados",[
+ 
+router.get("/obtener/desactivados",[ 
    
 ],httpsCultivos.getCultivosInactivos);
 
