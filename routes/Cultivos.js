@@ -10,7 +10,7 @@ import {validarJWT } from '../middleware/validar-jwts.js'
  
 const router = Router();
 
-router.get("/listar",[
+router.get("/",[
     
 ], httpsCultivos.getCultivos);
 
