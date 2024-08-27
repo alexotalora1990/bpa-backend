@@ -14,8 +14,8 @@ router.get("/nomina/:id",[
     check("id").custom(helpersNomina.validarExistaIdNomina),
     validarCampos
 ],httpsNomina.getNominaID);
-router.get("/activos", httpsNomina.getNominaActivos);
-router.get("/desactivados", httpsNomina.getNominaInactivos);
+router.get("/obt/activos", httpsNomina.getNominaActivos);
+router.get("/obt/desactivados", httpsNomina.getNominaInactivos);
 // router.get("/fechas", httpNomina.getNomina);
 // router.get("/empleado", httpNomina.getNomina);
 // router.get("/nomina", httpNomina.getNomina);

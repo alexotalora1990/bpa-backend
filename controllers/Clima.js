@@ -4,10 +4,13 @@ import Clima from "../models/Clima.js"
 const httpsClima= {
     getClima: async (req,res) => {
         try {
-            const clima = await Clima.find();
+            const clima = await Clima.find()
+            .populate("idfincas")
+            .populate("idempleado")
             res.json({ clima });
         } catch (error) {
             res.status(500).json({ error: "Error al obtener los climas" });
+            console.log(error);
         }
     },
     getClimaID: async (req, res) => {
@@ -25,8 +28,8 @@ const httpsClima= {
    
     postClima: async (req, res) => {
       try {
-        const { idfinca,idempleado,tipo,horaInicio,horaFinal,tempMin, tempMax    } = req.body;
-        const clima= new Clima({ idfinca,idempleado,tipo,horaInicio,horaFinal,tempMin, tempMax  });
+        const { idfincas,idempleado,tipo,horaInicio,horaFinal,tempMin, tempMax    } = req.body;
+        const clima= new Clima({ idfincas,idempleado,tipo,horaInicio,horaFinal,tempMin, tempMax  });
         await clima.save();
         res.status(201).json({ clima });
       } catch (error) {
@@ -37,8 +40,8 @@ const httpsClima= {
     putClima: async (req, res) => {
         try {
             const { id } = req.params;
-            const { idfinca,idempleado,tipo,horaInicio,horaFinal,tempMin, tempMax   } = req.body;
-            const climaActualizado = await Clima.findByIdAndUpdate(id, { idfinca,idempleado,tipo,horaInicio,horaFinal,tempMin, tempMax   }, { new: true });
+            const { idfincas,idempleado,tipo,horaInicio,horaFinal,tempMin, tempMax   } = req.body;
+            const climaActualizado = await Clima.findByIdAndUpdate(id, { idfincas,idempleado,tipo,horaInicio,horaFinal,tempMin, tempMax   }, { new: true });
             res.json({ climaActualizado });
         } catch (error) {
             res.status(400).json({ error: "No se pudo actualizar el clima" });
