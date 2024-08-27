@@ -3,7 +3,7 @@ import Proceso from "../models/Procesos.js"
 const httpProcesos= {
     getProcesos: async (req,res) => {
         try {
-            const procesos = await Proceso.find();
+            const procesos = await Proceso.find().populate('idempleado').populate('idcultivo');
             res.json({ procesos });
         } catch (error) {
             res.status(500).json({ error: "Error al obtener los procesos" });
