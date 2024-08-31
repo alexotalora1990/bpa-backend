@@ -1,4 +1,4 @@
-import  express  from "express"
+import express from "express"
 import 'dotenv/config'
 import dbConexion from "./database/cnxmongoose.js"
 import cors from "cors"
@@ -40,36 +40,36 @@ app.use(express.static('public'));
 
 /////////////////////////////////////////////////////////////////
 
-app.use("/api/administrador",administrador)
-app.use("/api/finca",fincas)
-app.use("/api/empleado",empleados)
-app.use("/api/proveedor",proveedor)
-app.use("/api/parcela",parcelas)
-app.use("/api/preparacionSuelo",preparacionSuelo)
-app.use("/api/analisis",analisisSuelo)
-app.use("/api/cultivo",cultivos)
-app.use("/api/analisisSuelo",analisisSuelos)
-app.use("/api/procesos",procesos)
-app.use("/api/produccion",produccion)
-app.use ("/api/controlPlagas",controlPlagas)
-app.use("/api/clima",clima)
-app.use("/api/comprador",comprador)
-app.use("/api/elaboracionSustrato",elaboracionSustrato)
-app.use("/api/factura",factura)
+app.use("/api/administrador", administrador)
+app.use("/api/finca", fincas)
+app.use("/api/empleado", empleados)
+app.use("/api/proveedor", proveedor)
+app.use("/api/parcela", parcelas)
+app.use("/api/preparacionSuelo", preparacionSuelo)
+app.use("/api/analisis", analisisSuelo)
+app.use("/api/cultivo", cultivos)
+app.use("/api/analisisSuelo", analisisSuelos)
+app.use("/api/procesos", procesos)
+app.use("/api/produccion", produccion)
+app.use("/api/controlPlagas", controlPlagas)
+app.use("/api/clima", clima)
+app.use("/api/comprador", comprador)
+app.use("/api/elaboracionSustrato", elaboracionSustrato)
+app.use("/api/factura", factura)
 app.use("/api/fertilizacion", fertilizacion)
-app.use("/api/gastos",gastos)
-app.use("/api/insumos",insumos)
+app.use("/api/gastos", gastos)
+app.use("/api/insumos", insumos)
 app.use("/api/semillas", semillas)
 app.use("/api/riego", riegos)
-app.use("/api/siembra",siembras)
+app.use("/api/siembra", siembras)
 app.use("/api/nomina", nominas)
-app.use("/api/maquinaria",maquinarias)
-app.use("/api/mantenimientos",mantenimientos)
+app.use("/api/maquinaria", maquinarias)
+app.use("/api/mantenimientos", mantenimientos)
 app.use("/api/inventarios", inventarios)
 
 
 
-app.listen(process.env.PORT,()=>{
+app.listen(process.env.PORT, () => {
     console.log(`Servidor escuchando en el puerto ${process.env.PORT}`);
     dbConexion()
 })
