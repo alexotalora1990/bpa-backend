@@ -18,24 +18,22 @@ router.get("riego/:id",[
 // router.get("/listarXEmpleados",httpRiegos.getRiegosByEmpleados);
 // router.get("/listarXCultivos",httpRiegos.getRiegosByCultivos);
 // router.get("/listarEntreFechas",httpRiegos.getRiegosByFechas);
-router.get("obtener/activos", httpRiegos.getRiegosActivos);
-router.get("obtener/desactivados", httpRiegos.getRiegosInactivos);
+
 
 // router.get("/listarCantAgua/:id",htppRiegos.getRiegosByAgua);
 
 router.post("/agregar",[
     check("idcultivo", "El id de Cultivo es requerido").notEmpty(),
-    check("idempleado", "El id de Empleado es requerido").notEmpty(),
     check("idcultivo", "El id de Cultivo es invalido").isMongoId(),
-    check("idempleado", "El id de Empleado es invalido").isMongoId(),
     check("diasTransplante", "Dias de riego es requerido").notEmpty(),
-    check("estadoFenológico", "Estado Fenológico es requerido").notEmpty(),
+    check("fenologico", "Estado Fenológico es requerido").notEmpty(),
     check("horaInicio", "Hora de inicio es requerida").notEmpty(),
     check("horaFin", "Hora Final es requerida").notEmpty(),
     check("cantidadAgua", "Cantidad de agua es requerida").notEmpty(),
     check("dosis", "Dosis  es requerida").notEmpty(),
     check("idcultivo").custom(helpersCultivo.validarExistaIdcultivo),
-    check("idempleado").custom(helpersEmpleado.validarExistaIdEmpleados),
+    check('idempleado', 'El id del empleado es invalido').isMongoId(),
+    check('idempleado').custom(helpersEmpleado.validarExistaIdEmpleados),
     validarCampos
 ], httpRiegos.postRiego);
 
@@ -45,28 +43,11 @@ router.put("/actualizar",[
 
     check("idcultivo", "El id de Cultivo es requerido").notEmpty(),
     check("idempleado", "El id de Empleado es requerido").notEmpty(),
-    check("idcultivo", "El id de Cultivo es invalido").isMongoId(),
-    check("idempleado", "El id de Empleado es invalido").isMongoId(),
-    check("diasTransplante", "Dias de riego es requerido").notEmpty(),
-    check("estadoFenológico", "Estado Fenológico es requerido").notEmpty(),
-    check("horaInicio", "Hora de inicio es requerida").notEmpty(),
-    check("horaFin", "Hora Final es requerida").notEmpty(),
-    check("cantidadAgua", "Cantidad de agua es requerida").notEmpty(),
-    check("dosis", "Dosis  es requerida").notEmpty(),
+    
     check("id").custom(helpersRiegos.validarExistaIdRiego),
-    check("idcultivo").custom(helpersCultivo.validarExistaIdcultivo),
-    check("idempleado").custom(helpersEmpleado.validarExistaIdEmpleados),
+ 
     validarCampos
 ], httpRiegos.putRiego);
- router.put("activar/:id",[
-    check("id", "El id es invalido").isMongoId(),
-    check("id").custom(helpersRiegos.validarExistaIdRiego),
-    validarCampos
- ],      httpRiegos.putRiego);
-router.put("desactivar/:id",[
-    check("id", "El id es invalido").isMongoId(),
-    check("id").custom(helpersRiegos.validarExistaIdRiego),
-    validarCampos
-], httpRiegos.putRiego);
+ 
 
 export default router;
