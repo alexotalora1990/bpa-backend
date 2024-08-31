@@ -1,5 +1,6 @@
 import Riego from "../models/Riego.js"
 
+
 const httpRiegos= {
     getRiegos: async (req,res) => {
         try {

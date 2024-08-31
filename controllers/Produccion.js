@@ -3,7 +3,8 @@ import Produccion from "../models/Produccion.js";
 const httpProduccion= {
     getProduccion: async (req,res) => {
         try {
-            const produccion = await Produccion.find();
+            const produccion = await Produccion.find()
+            .populate("idcultivo")
             res.json({ produccion });
         } catch (error) {
             res.status(500).json({ error: "Error al obtener las producciones" });
