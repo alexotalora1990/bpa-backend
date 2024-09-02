@@ -1,10 +1,9 @@
 
-
 import Siembra from '../models/Siembra.js';
 import moongose from "mongoose"
 
 
-const httpsSiembras = {
+const httpsSiembra = {
     getSiembras: async (req, res) => {
         try {
             const siembras = await Siembra.find()
@@ -91,4 +90,4 @@ const httpsSiembras = {
     }
 };
 
-export default httpsSiembras;
+export default httpsSiembra;

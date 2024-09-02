@@ -34,8 +34,8 @@ const httpsEmpleados = {
     },
     postEmpleados: async (req, res) => {
         try {
-            const { nombre, correo, contrasena, direccion, telefono, estudios, descripcion } = req.body;
-            const empleado = new Empleado({ nombre, correo, contrasena, direccion, telefono, estudios, descripcion });
+            const { nombre,numdocumento ,correo, contrasena, direccion, telefono, estudios, descripcion } = req.body;
+            const empleado = new Empleado({ nombre, numdocumento, correo, contrasena, direccion, telefono, estudios, descripcion });
             const salt = bcryptjs.genSaltSync();
             empleado.contrasena = bcryptjs.hashSync(contrasena, salt)
             await empleado.save();
@@ -47,15 +47,20 @@ const httpsEmpleados = {
     },
     putEmpleados: async (req, res) => {
         const { id } = req.params;
-        const { contrasena, ...resto } = req.body;  // excluimos la contrasena del body
+        const { contrasena, ...resto } = req.body;
         try {
-            const empleado = await Empleado.findByIdAndUpdate(id, { contrasena, ...resto }, { new: true });
+            if (contrasena) {
+                const salt = bcryptjs.genSaltSync();
+                resto.contrasena = bcryptjs.hashSync(contrasena, salt);
+            }
+            const empleado = await Empleado.findByIdAndUpdate(id, resto, { new: true });
             res.json({ empleado });
         } catch (error) {
             console.error('Error al actualizar empleado:', error);
             res.status(400).json({ message: 'No se pudo actualizar el empleado' });
         }
     },
+    
     putEmpleadosActivar: async (req, res) => {
         const { id } = req.params
         const empleado = await Empleado.findByIdAndUpdate(id, { estado: 1 }, { new: true })

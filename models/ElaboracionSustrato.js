@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 
 const elaboracionSchema = new mongoose.Schema({
-   idproceso:{type:mongoose.Schema.Types.ObjectId,ref:'Proceso',required: true },
+   idcultivo:{type:mongoose.Schema.Types.ObjectId,ref:'Cultivo',required: true },
    fecha:{type:Date, default:Date.now},
    productocomercial: {type:String, required:true},
    ingredienteActivo:{type:String, required:true, },
@@ -12,5 +12,5 @@ const elaboracionSchema = new mongoose.Schema({
     estado:{type:Number,default:1}
 })
 
-export default mongoose.model("ElaboracionSustrato", elaboracionSchema)
+export default mongoose.model("ElaboracionSustrato", elaboracionSchema) 
 

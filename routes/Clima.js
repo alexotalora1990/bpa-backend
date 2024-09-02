@@ -8,7 +8,7 @@ import { validarCampos } from '../middleware/validar-campos.js';
 
 const router = Router();
 
-router.get("/", httpsClima.getClima);
+router.get("/buscar", httpsClima.getClima);
 
 router.get("/clima/:id", [
     check('id', 'No es un ID válido').isMongoId(),
@@ -19,8 +19,8 @@ router.get("/clima/:id", [
 
 
 router.post("/agregar", [
-    check('idfinca', 'El id de la finca no es correcto').isMongoId(),
-    check('idfinca').custom(helpersFincas.validarExistaIdFinca),
+    check('idfincas', 'El id de la finca no es correcto').isMongoId(),
+    check('idfincas').custom(helpersFincas.validarExistaIdFinca),
     check('idempleado', 'El id del empleado es obligatorio').isMongoId(),
     check('idempleado').custom(helpersEmpleado.validarExistaIdEmpleados),
     check('horaInicio', 'La hora de inicio es obligatoria').notEmpty(),

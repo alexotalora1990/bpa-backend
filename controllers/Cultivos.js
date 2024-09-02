@@ -23,7 +23,7 @@ const httpsCultivos= {
     },
     getCultivosActivos: async (req, res) => {
       try {
-        const cultivosActivos = await Cultivo.find({ estado: 1});
+        const cultivosActivos = await Cultivo.find({ estado: 1}).populate('idparcela');
         res.json({ cultivosActivos });
         } catch (error) {
         console.log(error);
@@ -32,7 +32,7 @@ const httpsCultivos= {
     },
     getCultivosInactivos: async (req, res) => {
       try {
-        const cultivosInactivos = await Cultivo.find({ estado: 0 });
+        const cultivosInactivos = await Cultivo.find({ estado: 0 }).populate('idparcela');
         res.json({ cultivosInactivos });
       } catch (error) {
         console.log(error);

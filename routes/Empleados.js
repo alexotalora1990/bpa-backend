@@ -27,11 +27,14 @@ router.get("/obtener/desactivados", httpsEmpleados.getEmpleadosInactivos);
 router.post("/agregar",[
     check("nombre", "El nombre es requerido").notEmpty(),
     check("nombre", "El nombre debe tener al menos 3 caracteres").isLength({ min: 3 }),
+    check("numdocumento", "El Numero de Documento es requerido").notEmpty(),
+    check("numdocumento", "El Numero de Documento debe ser unico").custom(helpersEmpleado.validarDocumentoUnico),
     check("correo", "El correo es requerido").notEmpty(),
     check("correo", "El correo debe ser unico").custom(helpersEmpleado.validarCorreoUnico),
     check("contrasena", "La contraseña es requerida").notEmpty(),
     check("direccion", "La direccion es requerida").notEmpty(),
     check("telefono", "el telefono es requerido").notEmpty(),
+    check("telefono", "El Numero de Documento debe ser unico").custom(helpersEmpleado.validarTelefonoUnico),
     check("estudios", "Los estudios son requeridos").notEmpty(),
     validarCampos,
 ], httpsEmpleados.postEmpleados);
@@ -39,10 +42,14 @@ router.post("/agregar",[
 router.put("/actualizar/:id",[
     check("nombre", "El nombre es requerido").notEmpty(),
     check("nombre", "El nombre debe tener al menos 3 caracteres").isLength({ min: 3 }),
+    check("numdocumento", "El Numero de Documento es requerido").notEmpty(),
+    check("numdocumento", "El Numero de Documento debe ser unico").custom(helpersEmpleado.validarDocumentoUnico),
     check("correo", "El correo es requerido").notEmpty(),
+    check("correo", "El correo debe ser unico").custom(helpersEmpleado.validarCorreoUnico),
     check("contrasena", "La contraseña es requerida").notEmpty(),
     check("direccion", "La direccion es requerida").notEmpty(),
     check("telefono", "el telefono es requerido").notEmpty(),
+    check("telefono", "El Numero de Documento debe ser unico").custom(helpersEmpleado.validarTelefonoUnico),
     check("estudios", "Los estudios son requeridos").notEmpty(),
     validarCampos,
 ], httpsEmpleados.putEmpleados);

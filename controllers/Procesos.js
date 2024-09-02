@@ -3,7 +3,7 @@ import Proceso from "../models/Procesos.js"
 const httpProcesos= {
     getProcesos: async (req,res) => {
         try {
-            const procesos = await Proceso.find();
+            const procesos = await Proceso.find().populate('idempleado').populate('idcultivo');
             res.json({ procesos });
         } catch (error) {
             res.status(500).json({ error: "Error al obtener los procesos" });
@@ -23,7 +23,7 @@ const httpProcesos= {
     },
     getProcesosActivos: async (req, res) => {
         try {
-          const procesoActivo = await Proceso.find({ estado: 1});
+          const procesoActivo = await Proceso.find({ estado: 1}).populate('idempleado').populate('idcultivo');
           res.json({ procesoActivo });
              } catch (error) {
           console.log(error);
@@ -32,7 +32,7 @@ const httpProcesos= {
       },
     getProcesosInactivos: async (req, res) => {
         try {
-          const procesoDesactivado = await Proceso.find({ estado: 0 });
+          const procesoDesactivado = await Proceso.find({ estado: 0 }).populate('idempleado').populate('idcultivo');
           res.json({ procesoDesactivado });
         } catch (error) {
           console.log(error);

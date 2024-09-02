@@ -4,7 +4,8 @@ import mongoose from 'mongoose';
 const httpsNomina = {
     getNominas: async (req, res) => {
         try {
-            const nominas = await Nomina.find();
+            const nominas = await Nomina.find()
+            .populate("idempleados")
             res.json({ nominas });
         } catch (error) {
             console.error('Error al obtener las nominas:', error);
@@ -28,10 +29,12 @@ const httpsNomina = {
 
     getNominaActivos: async (req, res) => {
         const nominas = await Nomina.find({estado: 1})
+        .populate("idempleados")
         res.json({ nominas })
     },
     getNominaInactivos: async (req, res) => {
         const nominas = await Nomina.find({estado: 0})
+        .populate("idempleados")
         res.json({ nominas })
     },
 

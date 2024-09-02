@@ -24,8 +24,8 @@ router.get("/:id",[
 router.get("/obtener/activos",[
     
 ],httpsCultivos.getCultivosActivos);
-
-router.get("/obtener/desactivados",[
+ 
+router.get("/obtener/desactivados",[ 
    
 ],httpsCultivos.getCultivosInactivos);
 
