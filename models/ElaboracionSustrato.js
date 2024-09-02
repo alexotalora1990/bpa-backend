@@ -12,5 +12,5 @@ const elaboracionSchema = new mongoose.Schema({
     estado:{type:Number,default:1}
 })
 
-export default mongoose.model("ElaboracionSustrato", elaboracionSchema)
+export default mongoose.model("ElaboracionSustrato", elaboracionSchema) 
 
