@@ -6,7 +6,7 @@ const httpRiegos= {
         try {
             const riegos = await Riego.find()
             .populate("idcultivo")
-            .populate("idempleado")
+            .populate("idempleado");
             res.json({ riegos });
         } catch (error) {
             res.status(500).json({ error: "Error al obtener los riegos" });

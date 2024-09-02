@@ -3,7 +3,10 @@ import ElaboracionSustrato from "../models/ElaboracionSustrato.js";
 const httpsElaboracionSustrato = {
     getElaboraciones: async (req, res) => {
         try {
-            const elaboraciones = await ElaboracionSustrato.find().populate('idproceso idempleadooperario idempleadoresponsable');
+            const elaboraciones = await ElaboracionSustrato.find()
+            .populate('idcultivo')
+            .populate ('idempleadooperario')
+            .populate ('idempleadoresponsable');
             res.json({ elaboraciones });
         } catch (error) {
             console.error('Error al obtener las elaboraciones de sustrato:', error);
@@ -25,7 +28,10 @@ const httpsElaboracionSustrato = {
     },
     getElaboracionesActivas: async (req, res) => {
         try {
-            const elaboraciones = await ElaboracionSustrato.find({ estado: 1 }).populate('idproceso idempleadooperario idempleadoresponsable');
+            const elaboraciones = await ElaboracionSustrato.find({ estado: 1 })
+            .populate('idcultivo')
+            .populate ('idempleadooperario')
+            .populate ('idempleadoresponsable');
             res.json({ elaboraciones });
         } catch (error) {
             console.error('Error al obtener las elaboraciones de sustrato activas:', error);
@@ -34,7 +40,10 @@ const httpsElaboracionSustrato = {
     },
     getElaboracionesInactivas: async (req, res) => {
         try {
-            const elaboraciones = await ElaboracionSustrato.find({ estado: 0 }).populate('idproceso idempleadooperario idempleadoresponsable');
+            const elaboraciones = await ElaboracionSustrato.find({ estado: 0 })
+            .populate('idcultivo')
+            .populate ('idempleadooperario')
+            .populate ('idempleadoresponsable');
             res.json({ elaboraciones });
         } catch (error) {
             console.error('Error al obtener las elaboraciones de sustrato inactivas:', error);
@@ -43,8 +52,8 @@ const httpsElaboracionSustrato = {
     },
     postElaboracion: async (req, res) => {
         try {
-            const { idproceso, productocomercial, ingredienteActivo, dosisUtilizada, metodoAplicacion, idempleadooperario, idempleadoresponsable } = req.body;
-            const elaboracion = new ElaboracionSustrato({ idproceso, productocomercial, ingredienteActivo, dosisUtilizada, metodoAplicacion, idempleadooperario, idempleadoresponsable });
+            const { idcultivo, productocomercial, ingredienteActivo, dosisUtilizada, metodoAplicacion, idempleadooperario, idempleadoresponsable } = req.body;
+            const elaboracion = new ElaboracionSustrato({ idcultivo, productocomercial, ingredienteActivo, dosisUtilizada, metodoAplicacion, idempleadooperario, idempleadoresponsable });
             await elaboracion.save();
             res.json({ message: 'Elaboración de sustrato creada satisfactoriamente', elaboracion });
         } catch (error) {
@@ -58,7 +67,7 @@ const httpsElaboracionSustrato = {
             // const elaboracion = await ElaboracionSustrato.findByIdAndUpdate(id, req.body, { new: true });
             // res.json({ elaboracion });
             const { id } = req.params;
-            const { idempleadooperario, ...resto } = req.body;
+            const { _id, ...resto } = req.body;
             const sustrato= await ElaboracionSustrato.findByIdAndUpdate(idempleadooperario, resto, { new: true });
             res.json({ sustrato });
         } catch (error) {
