@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 
 const produccionSchema = new mongoose.Schema({
-    idcultivo:{ type: mongoose.Schema.Types.ObjectId, ref: 'Cultivos', required: true },
+    idcultivo:{ type: mongoose.Schema.Types.ObjectId, ref: 'Cultivo', required: true },
     fecha:{type:Date,default:Date.now},
     Numlote:{type: String,required:true},
     especie:{type: String,required:true},
