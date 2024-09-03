@@ -64,11 +64,10 @@ const httpsElaboracionSustrato = {
     putElaboracion: async (req, res) => {
         const { id } = req.params;
         try {
-            // const elaboracion = await ElaboracionSustrato.findByIdAndUpdate(id, req.body, { new: true });
-            // res.json({ elaboracion });
+            
             const { id } = req.params;
             const { _id, ...resto } = req.body;
-            const sustrato= await ElaboracionSustrato.findByIdAndUpdate(idempleadooperario, resto, { new: true });
+            const sustrato= await ElaboracionSustrato.findByIdAndUpdate(id, resto, { new: true });
             res.json({ sustrato });
         } catch (error) {
             console.error('Error al actualizar elaboración de sustrato:', error);
