@@ -25,8 +25,8 @@ router.post("/agregar", [
     check("idcultivo").custom(helpersCultivo.validarExistaIdcultivo),
     check('idempleado', 'El idempleado es obligatorio').isMongoId(),
     check("idempleado").custom(helpersEmpleado.validarExistaIdEmpleados),
-    check('idadministrador', 'El idadministrador es obligatorio').isMongoId(),
-    check("idadministrador").custom(helpersEmpleado.validarExistaIdEmpleados),
+    check('idoperario', 'El idadministrador es obligatorio').isMongoId(),
+    check("idoperario").custom(helpersEmpleado.validarExistaIdEmpleados),
     check('nombre', 'El nombre es obligatorio y debe tener al menos 4 caracteres').isString().isLength({ min: 4 }),
     check('ingredienteActivo', 'El ingrediente activo es obligatorio').isString(),
     check('dosis', 'La dosis es obligatoria ').isString(),
@@ -36,14 +36,7 @@ router.post("/agregar", [
 router.put("/actualizar/:id", [
     check('id', 'No es un ID válido').isMongoId(),
     check("id").custom(helpersControlPlagas.validarExistaIdControlPlagas),
-    // check("idcultivo").custom(helpersCultivo.validarExistaIdcultivo),
-    // check('idempleado', 'El idempleado es obligatorio').isMongoId(),
-    // check("idempleado").custom(helpersEmpleado.validarExistaIdEmpleados),
-    // check('idadministrador', 'El idadministrador es obligatorio').isMongoId(),
-    // check("idadministrador").custom(helpersEmpleado.validarExistaIdEmpleados),
-    // check('nombre', 'El nombre debe tener al menos 4 caracteres').optional().isString().isLength({ min: 4 }),
-    // check('ingredienteActivo', 'El ingrediente activo es obligatorio').optional().isString(),
-    // check('dosis', 'La dosis debe ser un numero').optional().isNumeric(),
+  
     validarCampos
 ], httpsControlPlagas.putControlPlagas);
 
@@ -57,4 +50,4 @@ router.put("/desactivar/:id", [
     validarCampos
 ], httpsControlPlagas.putControlPlagasDesactivar);
 
-export default router;
+export default router; 

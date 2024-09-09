@@ -39,7 +39,7 @@ router.put("/actualizar/:id", [
     check('id', 'No es un ID válido').isMongoId(),
     check('id').custom(helpersElaboracionSustrato.validarExistaIdElaboracionSustrato),
     
-    validarCampos
+    validarCampos 
 ], httpsElaboracionSustrato.putElaboracion);
 
 router.put("/activar/:id", [

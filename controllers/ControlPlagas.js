@@ -3,7 +3,7 @@ import ControlPlagas from "../models/ControlPlagas.js";
 const httpsControlPlagas = {
     getControlPlagas: async (req, res) => {
         try {
-            const controlPlagas = await ControlPlagas.find().populate('idcultivo idempleado idadministrador');
+            const controlPlagas = await ControlPlagas.find().populate('idcultivo idempleado');
             res.json({ controlPlagas });
         } catch (error) {
             console.error('Error al obtener los controles de plagas:', error);
@@ -13,7 +13,7 @@ const httpsControlPlagas = {
     getControlPlagaID: async (req, res) => {
         const { id } = req.params;
         try {
-            const controlPlaga = await ControlPlagas.findById(id).populate('idcultivo idempleado idadministrador');
+            const controlPlaga = await ControlPlagas.findById(id).populate('idcultivo idempleado');
             if (!controlPlaga) {
                 return res.status(404).json({ message: 'Control de plaga no encontrado' });
             }
@@ -25,7 +25,7 @@ const httpsControlPlagas = {
     },
     getControlPlagasActivos: async (req, res) => {
         try {
-            const controlPlagas = await ControlPlagas.find({ estado: 1 }).populate('idcultivo idempleado idadministrador');
+            const controlPlagas = await ControlPlagas.find({ estado: 1 }).populate('idcultivo idempleado idoperario');
             res.json({ controlPlagas });
         } catch (error) {
             console.error('Error al obtener los controles de plagas activos:', error);
@@ -34,7 +34,7 @@ const httpsControlPlagas = {
     },
     getControlPlagasInactivos: async (req, res) => {
         try {
-            const controlPlagas = await ControlPlagas.find({ estado: 0 }).populate('idcultivo idempleado idadministrador');
+            const controlPlagas = await ControlPlagas.find({ estado: 0 }).populate('idcultivo idempleado idoperario');
             res.json({ controlPlagas });
         } catch (error) {
             console.error('Error al obtener los controles de plagas inactivos:', error);
@@ -43,8 +43,8 @@ const httpsControlPlagas = {
     },
     postControlPlagas: async (req, res) => {
         try {
-            const { idcultivo, idempleado, idadministrador, nombre, ingredienteActivo, dosis, observaciones } = req.body;
-            const controlPlaga = new ControlPlagas({ idcultivo, idempleado, idadministrador, nombre, ingredienteActivo, dosis, observaciones });
+            const { idcultivo, idempleado, idoperario, nombre, ingredienteActivo, dosis, observaciones } = req.body;
+            const controlPlaga = new ControlPlagas({ idcultivo, idempleado, idoperario, nombre, ingredienteActivo, dosis, observaciones });
             await controlPlaga.save();
             res.json({ message: 'Control de plaga creado satisfactoriamente', controlPlaga });
         } catch (error) {
