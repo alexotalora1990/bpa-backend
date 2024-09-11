@@ -5,7 +5,7 @@ const httpProduccion= {
         try {
             const produccion = await Produccion.find()
             .populate("idcultivo")
-            res.json({ produccion });
+            res.json({produccion});
         } catch (error) {
             res.status(500).json({ error: "Error al obtener las producciones" });
         }
@@ -17,6 +17,7 @@ const httpProduccion= {
             if (!produccion) {
                 return res.status(404).json({ error: "Produccion no encontrada" });
             }
+            
             res.json({ produccion });
         } catch (error) {
             res.status(500).json({ error: "Error al obtener la produccion" });
@@ -24,7 +25,8 @@ const httpProduccion= {
     },
     getProduccionActivas: async (req, res) => {
         try {
-          const produccionActiva = await Produccion.find({ estado: 1});
+          const produccionActiva = await Produccion.find({ estado: 1})
+          .populate("idcultivo")
           res.json({ produccionActiva });
              } catch (error) {
           console.log(error);
@@ -33,7 +35,8 @@ const httpProduccion= {
       },
     getProduccionInactivas: async (req, res) => {
         try {
-          const produccionDesactivada = await Produccion.find({ estado: 0 });
+          const produccionDesactivada = await Produccion.find({ estado: 0 })
+          .populate("idcultivo")
           res.json({ produccionDesactivada });
         } catch (error) {
           console.log(error);

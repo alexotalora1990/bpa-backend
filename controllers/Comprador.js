@@ -3,7 +3,8 @@ import Comprador from "../models/Comprador.js";
 const httpsComprador = {
     getCompradores: async (req, res) => {
         try {
-            const compradores = await Comprador.find().populate('idproduccion');
+            const compradores = await Comprador.find()
+            .populate('idproduccion')
             res.json({ compradores });
         } catch (error) {
             console.error('Error al obtener los compradores:', error);
@@ -25,7 +26,8 @@ const httpsComprador = {
     },
     getCompradoresActivos: async (req, res) => {
         try {
-            const compradores = await Comprador.find({ estado: 1 }).populate('idproduccion');
+            const compradores = await Comprador.find({ estado: 1 })
+            .populate("idproduccion")
             res.json({ compradores });
         } catch (error) {
             console.error('Error al obtener los compradores activos:', error);
@@ -34,7 +36,8 @@ const httpsComprador = {
     },
     getCompradoresInactivos: async (req, res) => {
         try {
-            const compradores = await Comprador.find({ estado: 0 }).populate('idproduccion');
+            const compradores = await Comprador.find({ estado: 0 })
+            .populate("idproduccion")
             res.json({ compradores });
         } catch (error) {
             console.error('Error al obtener los compradores inactivos:', error);
@@ -43,8 +46,8 @@ const httpsComprador = {
     },
     postComprador: async (req, res) => {
         try {
-            const { idproduccion, especie, nombre, telefono, cantidad, numguiaTransporte, numloteComercial, valor } = req.body;
-            const comprador = new Comprador({ idproduccion, especie, nombre, telefono, cantidad, numguiaTransporte, numloteComercial, valor });
+            const { idproduccion, nombre, telefono, cantidad, numguiaTransporte, numloteComercial, valor } = req.body;
+            const comprador = new Comprador({ idproduccion, nombre, telefono, cantidad, numguiaTransporte, numloteComercial, valor });
             await comprador.save();
             res.json({ message: 'Comprador creado satisfactoriamente', comprador });
         } catch (error) {
