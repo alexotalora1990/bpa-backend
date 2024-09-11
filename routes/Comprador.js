@@ -22,7 +22,6 @@ router.get("/obtener/desactivados", httpsComprador.getCompradoresInactivos);
 router.post("/agregar", [
     check('idproduccion', 'El id de la producción es obligatorio').isMongoId(),
     check('idproduccion').custom(helpersProduccion.validarExistaIdProduccion),
-    check('especie', 'La especie es obligatoria').isString(),
     check('nombre', 'El nombre es obligatorio').isString(),
     check('telefono', 'El teléfono es obligatorio').isString(),
     check('telefono').custom(helpersComprador.validarTelefono),
@@ -40,7 +39,6 @@ router.put("/actualizar/:id", [
     check('id').custom(helpersComprador.validarExistaIdComprador),
     check('idproduccion', 'El id de la producción debe ser un ID válido').optional().isMongoId(),
     check('idproduccion').custom(helpersProduccion.validarExistaIdProduccion),
-    check('especie', 'La especie debe ser un string').optional().isString(),
     check('nombre', 'El nombre debe ser un string').optional().isString(),
     check('telefono', 'El teléfono debe ser un string').optional().isString(),
     check('telefono').custom(helpersComprador.validarTelefono),

@@ -2,7 +2,6 @@ import mongoose from "mongoose";
 
 const compradorSchema=new mongoose.Schema({
     idproduccion:{type:mongoose.Schema.Types.ObjectId,ref:'Produccion',required:true},
-    especie:{type:String,required:true},
     nombre:{type:String,required:true},
     telefono:{type:String,required:true},
     cantidad:{type:Number,required:true},
