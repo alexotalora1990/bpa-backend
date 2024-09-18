@@ -2,7 +2,7 @@ import { Router } from "express";
 import { check } from 'express-validator';
 import httpsInsumo from "../controllers/Insumos.js";
 import helpersInsumo from "../helpers/Insumos.js"
-import helpersProveedor from "../helpers/Proveedores.js"
+import helpersFincas from "../helpers/Fincas.js"
 import { validarCampos } from '../middleware/validar-campos.js';
 
 const router = Router();
@@ -20,8 +20,8 @@ router.get("/activos", httpsInsumo.getInsumosActivos);
 router.get("/desactivados", httpsInsumo.getInsumosInactivos);
 
 router.post("/agregar", [
-    check('idproveedor', 'El id del proveedor es obligatorio').isMongoId(),
-    check('idproveedor').custom(helpersProveedor.validarExistaIdProveedor),
+    check("idfinca", "El ID de la finca es requerido").notEmpty(),
+    check("idfinca").custom(helpersFincas.validarExistaIdFinca),
     check('nombre', 'El nombre es obligatorio').isString(),
     check('relacion', 'La relación es obligatoria').isString(),
     check('cantidad', 'La cantidad debe ser un número válido').isNumeric(),
@@ -34,8 +34,8 @@ router.post("/agregar", [
 
 router.put("/actualizar/:id", [
     check('id', 'No es un ID válido').isMongoId(),
-    check('idproveedor', 'El id del proveedor debe ser un ID válido').optional().isMongoId(),
-    check('idproveedor').custom(helpersProveedor.validarExistaIdProveedor),
+    check("idfinca", "El ID de la finca es requerido").notEmpty(),
+    check("idfinca").custom(helpersFincas.validarExistaIdFinca),
     check('nombre', 'El nombre debe ser un string').optional().isString(),
     check('relacion', 'La relación debe ser un string').optional().isString(),
     check('cantidad', 'La cantidad debe ser un número válido').optional().isNumeric(),

@@ -2,10 +2,12 @@ export const validarRol = ( rol ) =>{
     try {
         return (req, res, next ) =>{
             let validate = false;
+
             const admin = req.admin;
             for (let i = 0; i < rol.length; i++) {
                 const roles = rol[i];
                 if (admin.rol === roles) {
+
                     validate = true;
                 }
             }
