@@ -35,8 +35,8 @@ const httpsProveedores = {
 
     postProveedor: async (req, res) => {
         try {
-            const { nombre, direccion, telefono, correo } = req.body;
-            const proveedor = new Proveedor({ nombre, direccion, telefono, correo });
+            const { idfinca,nombre, direccion, telefono, correo } = req.body;
+            const proveedor = new Proveedor({ idfinca ,nombre, direccion, telefono, correo });
             await proveedor.save();
             res.json({ message: 'Proveedor creado satisfactoriamente', proveedor });
         } catch (error) {
@@ -46,9 +46,9 @@ const httpsProveedores = {
     },
     PutProveedor: async (req, res) => {
         const { id } = req.params;
-        const { nombre, direccion, telefono, correo } = req.body;
+        const {idfinca,nombre, direccion, telefono, correo } = req.body;
         try {
-            const proveedor = await Proveedor.findByIdAndUpdate(id, { nombre, direccion, telefono, correo }, { new: true });
+            const proveedor = await Proveedor.findByIdAndUpdate(id, { idfinca,nombre, direccion, telefono, correo }, { new: true });
             if (!proveedor) {
                 return res.status(404).json({ message: 'Proveedor no encontrado' });
             }
