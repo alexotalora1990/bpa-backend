@@ -2,6 +2,7 @@ import mongoose from "mongoose";
 
 const fincaSchema = new mongoose.Schema({
     idadministrador:{type:mongoose.Schema.Types.ObjectId,ref:'Administrador',required:true},
+
     nombre:{type:String,required:true},
     rut:{type:String,required:true},
     direccion:{type:String,required:true},
@@ -18,6 +19,7 @@ const fincaSchema = new mongoose.Schema({
         este:{type:String },
         oeste:{type:String }
     },
+    documentos:{type:String},
     estado:{type:Number,default:1}
 })
 

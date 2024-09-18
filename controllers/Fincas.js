@@ -44,8 +44,8 @@ const httpFincas= {
       },
     postFinca: async (req, res) => {
         try {
-            const { idadministrador,area, nombre,rut, direccion, ubicacion, departamento,ciudad,limites } = req.body;
-            const nuevaFinca = new Finca({ idadministrador, area, nombre,rut, direccion, ubicacion,departamento,ciudad, limites });
+            const { idadministrador,area, nombre,rut, direccion, ubicacion, departamento,ciudad,limites,documentos } = req.body;
+            const nuevaFinca = new Finca({ idadministrador, area, nombre,rut, direccion, ubicacion,departamento,ciudad, limites,documentos });
             await nuevaFinca.save();
             res.status(201).json({ nuevaFinca });
         } catch (error) {
@@ -56,8 +56,8 @@ const httpFincas= {
     putFinca: async (req, res) => {
         try {
             const { id } = req.params;
-            const { area, nombre,rut, direccion, ubicacion,departamento,ciudad,limites, idadministrador } = req.body;
-            const fincaActualizada = await Finca.findByIdAndUpdate(id, { area, nombre,rut, direccion, ubicacion,departamento,ciudad,limites, idadministrador  }, { new: true });
+            const { area, nombre,rut, direccion, ubicacion,departamento,ciudad,limites, idadministrador,documentos } = req.body;
+            const fincaActualizada = await Finca.findByIdAndUpdate(id, { area, nombre,rut, direccion, ubicacion,departamento,ciudad,limites, idadministrador,documentos  }, { new: true });
             res.json({ fincaActualizada });
         } catch (error) {
             res.status(400).json({ error: "No se pudo actualizar la finca" });

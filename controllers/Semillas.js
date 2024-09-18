@@ -39,22 +39,23 @@ const httpSemillas= {
           res.status(500).json({ error: "Error al obtener las semillas desactivadas" });
         }
       },
-    postSemilla: async (req, res) => {
+      postSemilla: async (req, res) => {
         try {
-            const { idproveedores,numFactura,fechaCompra,fechaVencimiento,especie,NumLote,origen,poderGerminativo,unidadtotal,total  } = req.body;
-            const nuevaSemilla = new Semilla({ idproveedores,numFactura,fechaCompra,fechaVencimiento,especie,NumLote,origen,poderGerminativo,unidadtotal,total});
+            const { nombre, fechaVencimiento, especie } = req.body;
+            const nuevaSemilla = new Semilla({  nombre, fechaVencimiento, especie, ...req.body });
             await nuevaSemilla.save();
-            res.json({nuevaSemilla});
+            res.json({ nuevaSemilla });
         } catch (error) {
             res.status(400).json({ error: "No se pudo crear el registro de semilla" });
             console.log(error);
         }
     },
+    
     putSemilla: async (req, res) => { 
         try {
             const { id } = req.params;
-            const { idproveedores,numFactura,fechaCompra,fechaVencimiento,especie,Numlote,origen,poderGerminativo,unidadtotal,total  } = req.body;
-            const semillaActualizada = await Semilla.findByIdAndUpdate(id, { idproveedores,numFactura,fechaCompra,fechaVencimiento,especie,Numlote,origen,poderGerminativo,unidadtotal,total  }, { new: true });
+            const {  nombre, fechaVencimiento, especie } = req.body;
+            const semillaActualizada = await Semilla.findByIdAndUpdate(id, {  nombre, fechaVencimiento, especie, ...req.body }, { new: true });
             res.json({ semillaActualizada });
         } catch (error) {
             res.status(400).json({ error: "No se pudo actualizar la semilla" });

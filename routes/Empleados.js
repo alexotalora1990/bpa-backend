@@ -3,6 +3,7 @@ import { check } from 'express-validator';
 import httpsEmpleados from "../controllers/Empleados.js";
 import helpersEmpleado from "../helpers/Empleados.js";
 import  {validarCampos } from '../middleware/validar-campos.js';
+import helpersFincas from "../helpers/Fincas.js"
 // import { validarJWT } from "../middleware/validar-jwts.js";
 
 
@@ -25,6 +26,8 @@ router.get("/obtener/desactivados", httpsEmpleados.getEmpleadosInactivos);
 // router.get("/comprasX", httpsEmpleados.getEmpleadosXcompras);
 
 router.post("/agregar",[
+    check("idfinca", "El ID de la finca es requerido").notEmpty(),
+    check("idfinca").custom(helpersFincas.validarExistaIdFinca),
     check("nombre", "El nombre es requerido").notEmpty(),
     check("nombre", "El nombre debe tener al menos 3 caracteres").isLength({ min: 3 }),
     check("numdocumento", "El Numero de Documento es requerido").notEmpty(),
