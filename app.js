@@ -28,7 +28,7 @@ import siembras from "./routes/Siembra.js"
 import nominas from "./routes/Nomina.js"
 import maquinarias from "./routes/MaquinariaHerramientas.js"
 import mantenimientos from "./routes/Mantenimientos.js"
-import inventarios from "./routes/Inventarios.js"
+// import inventarios from "./routes/Inventarios.js"
 
 // actualizacion
 
@@ -65,7 +65,7 @@ app.use("/api/siembra", siembras)
 app.use("/api/nomina", nominas)
 app.use("/api/maquinaria", maquinarias)
 app.use("/api/mantenimientos", mantenimientos)
-app.use("/api/inventarios", inventarios)
+// app.use("/api/inventarios", inventarios)
 
 
 
