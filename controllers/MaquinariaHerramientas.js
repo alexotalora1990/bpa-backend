@@ -43,8 +43,8 @@ const httpsMaquinaria = {
     },
     postMaquinaria: async (req, res) => {
         try {
-            const { idproveedores, nombre, tipo, observaciones, cantidad, Total, fechaCompra } = req.body;
-            const maquinaria = new Maquinaria({ idproveedores, nombre, tipo, observaciones, cantidad, Total, fechaCompra });
+            const { idproveedores, nombre, tipo, observaciones, cantidad, Total, fechaCompra,mantenimiento,desinfeccion } = req.body;
+            const maquinaria = new Maquinaria({ idproveedores, nombre, tipo, observaciones, cantidad, Total, fechaCompra, mantenimiento,desinfeccion });
             await maquinaria.save();
             res.json({ message: 'Maquinaria creada satisfactoriamente', maquinaria });
         } catch (error) {

@@ -41,8 +41,8 @@ const httpFertilizacion= {
       },
     postFertilizacion: async (req, res) => {
         try {
-            const { idcultivo,idempleado,idinventario,estadoFenologico,tipo,nombreFertilizante,cantidad } = req.body;
-            const nuevaFertilizacion = new Fertilizacion({idcultivo,idempleado,idinventario,estadoFenologico,tipo,nombreFertilizante,cantidad });
+            const { idcultivo,idempleado,idinventario,idinsumo,estadoFenologico,tipo,nombreFertilizante,cantidad } = req.body;
+            const nuevaFertilizacion = new Fertilizacion({idcultivo,idempleado,idinventario,idinsumo,estadoFenologico,tipo,nombreFertilizante,cantidad });
             await nuevaFertilizacion.save();
             res.status(201).json({ nuevaFertilizacion });
         } catch (error) {
@@ -53,8 +53,8 @@ const httpFertilizacion= {
     putFertilizacion: async (req, res) => {
         try {
             const { id } = req.params;
-            const { idcultivo,idempleado,idinventario,estadoFenologico,tipo,nombreFertilizante,cantidad  } = req.body;
-            const fertilizacionActualizada = await Fertilizacion.findByIdAndUpdate(id, { idcultivo,idempleado,idinventario,estadoFenologico,tipo,nombreFertilizante,cantidad  }, { new: true });
+            const { idcultivo,idempleado,idinventario,idinsumo,estadoFenologico,tipo,nombreFertilizante,cantidad  } = req.body;
+            const fertilizacionActualizada = await Fertilizacion.findByIdAndUpdate(id, { idcultivo,idempleado,idinventario,idinsumo,estadoFenologico,tipo,nombreFertilizante,cantidad  }, { new: true });
             res.json({ fertilizacionActualizada });
         } catch (error) {
             res.status(400).json({ error: "No se pudo actualizar la fertilizacion" });
