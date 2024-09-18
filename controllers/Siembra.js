@@ -49,8 +49,8 @@ const httpsSiembra = {
     },
     postSiembra: async (req, res) => {
         try {
-            const { idcultivos, idempleados, idinventario, fechasiembra, fechacosecha, transplante, cultivoanterior } = req.body;
-            const siembra = new Siembra({ idcultivos, idempleados, idinventario, fechasiembra, fechacosecha, transplante, cultivoanterior });
+            const { idcultivos, idempleados, idsemillas, fechasiembra, fechacosecha, transplante, cultivoanterior,cantidad} = req.body;
+            const siembra = new Siembra({ idcultivos, idempleados, idsemillas, fechasiembra, fechacosecha, transplante, cultivoanterior,cantidad });
             await siembra.save();
             res.json({ message: 'Siembra creada satisfactoriamente', siembra });
         } catch (error) {

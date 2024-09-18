@@ -34,8 +34,8 @@ const httpsEmpleados = {
     },
     postEmpleados: async (req, res) => {
         try {
-            const { nombre,numdocumento ,correo, direccion, telefono, estudios, descripcion } = req.body;
-            const empleado = new Empleado({ nombre, numdocumento, correo, direccion, telefono, estudios, descripcion });
+            const { nombre,numdocumento ,correo, direccion, telefono, estudios, descripcion, idfinca } = req.body;
+            const empleado = new Empleado({ nombre, numdocumento, correo, direccion, telefono, estudios, idfinca, descripcion });
             await empleado.save();
             res.json({ message: 'Empleado creado satisfactoriamente', empleado });
         } catch (error) {

@@ -4,7 +4,7 @@ import httpsSiembra from "../controllers/Siembra.js"
 import helpersSiembra from '../helpers/Siembra.js';
 import helpersCultivo from "../helpers/Cultivos.js";
 import helpersEmpleado from "../helpers/Empleados.js";
-import helpersInventario from "../helpers/Inventarios.js";
+import helpersSemilla from "../helpers/Semillas.js"
 import { validarCampos } from '../middleware/validar-campos.js';
 
 
@@ -51,8 +51,8 @@ router.post("/agregar", [
     check('idcultivos').custom(helpersCultivo.validarExistaIdcultivo),
     check('idempleados', 'El id de empleados es obligatorio').isMongoId(),
     check('idempleados').custom(helpersEmpleado.validarExistaIdEmpleados),
-    check('idinventario', 'El id de inventario es obligatorio').isMongoId(),
-    check('idinventario').custom(helpersInventario.validarExistaIdInventario),
+    check('idsemillas', 'El id de semillas es obligatorio').isMongoId(),
+    check('idinventario').custom(helpersSemilla.validarExistaIdSemilla),
     check('fechasiembra', 'La fecha de siembra es obligatoria').isDate(),
     check('fechacosecha', 'La fecha de cosecha es obligatoria').isDate(),
     check('transplante', 'El transplante es obligatorio').not().isEmpty(),
@@ -67,8 +67,8 @@ router.put("/actualizar/:id", [
     check('idcultivos').custom(helpersCultivo.validarExistaIdcultivo),
     check('idempleados', 'El id de empleados es obligatorio').isMongoId(),
     check('idempleados').custom(helpersEmpleado.validarExistaIdEmpleados),
-    check('idinventario', 'El id de inventario es obligatorio').isMongoId(),
-    check('idinventario').custom(helpersInventario.validarExistaIdInventario),
+    check('idsemillas', 'El id de semillas es obligatorio').isMongoId(),
+    check('idinventario').custom(helpersSemilla.validarExistaIdSemilla),
     check('fechasiembra', 'La fecha de siembra debe ser una fecha válida').optional().isDate(),
     check('fechacosecha', 'La fecha de cosecha debe ser una fecha válida').optional().isDate(),
     check('transplante', 'El transplante debe ser un string').optional().isString(),

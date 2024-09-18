@@ -43,8 +43,8 @@ const httpsInsumo = {
     },
     postInsumo: async (req, res) => {
         try {
-            const { idproveedor, nombre, relacion, cantidad, unidad, responsable, observaciones, total } = req.body;
-            const insumo = new Insumo({ idproveedor, nombre, relacion, cantidad, unidad, responsable, observaciones, total });
+            const { idfinca, nombre, relacion,registroica,registroinvima, cantidad, unidad, observaciones } = req.body;
+            const insumo = new Insumo({ idfinca, nombre, relacion,registroica,registroinvima, cantidad, unidad, observaciones });
             await insumo.save();
             res.json({ message: 'Insumo creado satisfactoriamente', insumo });
         } catch (error) {
