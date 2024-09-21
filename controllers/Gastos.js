@@ -46,8 +46,8 @@ const httpsGasto = {
     },
     postGasto: async (req, res) => {
         try {
-            const { nombre, fecha, numfactura, descripcion, idinsumos, idsemillas, idmantenimiento } = req.body;
-            const gasto = new Gasto({ nombre, fecha, numfactura, descripcion, idinsumos, idsemillas, idmantenimiento });
+            const { idfinca,nombre, fecha, numfactura,descripcion,total, insusmos,semillas } = req.body;
+            const gasto = new Gasto({  idfinca,nombre, fecha, numfactura,descripcion,total, insusmos,semillas  });
             await gasto.save();
             res.json({ message: 'Gasto creado satisfactoriamente', gasto });
         } catch (error) {
