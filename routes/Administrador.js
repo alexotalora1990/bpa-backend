@@ -4,11 +4,15 @@ import httpAdmin from "../controllers/Administrador.js";
 import helpersAdmin from '../helpers/Administrador.js';
 import  {validarCampos } from '../middleware/validar-campos.js';
 import { validarJWT } from "../middleware/validar-jwts.js";
+import { validarRol } from "../middleware/rolesPermisos.js";
 
 
 const router = Router();
 
-router.get("/", [],httpAdmin.getAdmin);
+router.get("/", [
+    // validarJWT,
+    // validarRol(["Administrador"])
+],httpAdmin.getAdmin);
     
 router.get("/admin/:id", [
     validarJWT, 
