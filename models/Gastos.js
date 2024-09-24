@@ -7,19 +7,19 @@ idfinca:{type:mongoose.Schema.Types.ObjectId,ref:'Finca',required:true},
     descripcion:{type:String,required:true},
     total:{type:Number, require:true},
     insumos:{
-        idproveedor:{type:mongoose.Schema.Types.ObjectId,ref:'Proveedor',required:false},
-        idinsumo:{type:mongoose.Schema.Types.ObjectId,ref:'Insumo',required:false},
-        unidad:{type:String,require:false},
-        totali:{type:Number, require:false},
-        cantidad:{type:Number, require:false}
+        idproveedor:{type:mongoose.Schema.Types.ObjectId,ref:'Proveedor'},
+        idinsumo:{type:mongoose.Schema.Types.ObjectId,ref:'Insumo'},
+        unidad:{type:String},
+        total:{type:Number},
+        cantidad:{type:Number}
     },
     semillas:{
-        idproveedor:{type:mongoose.Schema.Types.ObjectId,ref:'Proveedor',required:false},
-        idsemilla:{type:mongoose.Schema.Types.ObjectId,ref:'Semilla',required:false},
-        unidad:{type:String,require:false},
-        total:{type:Number, require:false},
-        cantidad:{type:Number, require:false}
-    },
+        idproveedor:{type:mongoose.Schema.Types.ObjectId,ref:'Proveedor'},
+        idsemilla:{type:mongoose.Schema.Types.ObjectId,ref:'Semilla'},
+        unidad:{type:String},
+        total:{type:Number},
+        cantidad:{type:Number}
+    }, 
     estado:{type:Number,default:1}
 })
 
