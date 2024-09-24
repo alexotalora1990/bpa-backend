@@ -2,7 +2,6 @@ import mongoose from "mongoose";
 
 const fincaSchema = new mongoose.Schema({
     idadministrador:{type:mongoose.Schema.Types.ObjectId,ref:'Administrador',required:true},
-
     nombre:{type:String,required:true},
     rut:{type:String,required:true},
     direccion:{type:String,required:true},
