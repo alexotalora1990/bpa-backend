@@ -4,7 +4,8 @@ import bcryptjs from "bcryptjs";
 const httpsEmpleados = {
     getEmpleados: async (req, res) => {
         try {
-            const empleados = await Empleado.find();
+            const empleados = await Empleado.find()
+            .populate("idfinca")
             res.json({ empleados });
         } catch (error) {
             console.error('Error al obtener los empleados:', error);
@@ -26,10 +27,12 @@ const httpsEmpleados = {
     },
     getEmpleadosActivos: async (req, res) => {
         const empleados = await Empleado.find({estado: 1})
+        .populate("idfinca")
         res.json({ empleados })
     },
     getEmpleadosInactivos: async (req, res) => {
         const empleados = await Empleado.find({estado: 0})
+        .populate("idfinca")
         res.json({ empleados })
     },
     postEmpleados: async (req, res) => {

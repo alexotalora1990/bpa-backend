@@ -26,9 +26,7 @@ router.post("/agregar", [
     check('relacion', 'La relación es obligatoria').isString(),
     check('cantidad', 'La cantidad debe ser un número válido').isNumeric(),
     check('unidad', 'La unidad es obligatoria').isString(),
-    check('responsable', 'El responsable es obligatorio').isString(),
     check('observaciones', 'Las observaciones son obligatorias').isString(),
-    check('total', 'El total debe ser un número válido').isNumeric(),
     validarCampos
 ], httpsInsumo.postInsumo);
 
@@ -40,7 +38,6 @@ router.put("/actualizar/:id", [
     check('relacion', 'La relación debe ser un string').optional().isString(),
     check('cantidad', 'La cantidad debe ser un número válido').optional().isNumeric(),
     check('unidad', 'La unidad debe ser un string').optional().isString(),
-    check('responsable', 'El responsable debe ser un string').optional().isString(),
     check('observaciones', 'Las observaciones deben ser un string').optional().isString(),
     check('total', 'El total debe ser un número válido').optional().isNumeric(),
     validarCampos

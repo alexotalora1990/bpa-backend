@@ -3,7 +3,10 @@ import Fertilizacion from "../models/Fertilizacion.js";
 const httpFertilizacion= {
     getFertilizacion: async (req,res) => {
         try {
-            const fertilizacion = await Fertilizacion.find();
+            const fertilizacion = await Fertilizacion.find()
+            .populate("idcultivo")
+            .populate("idempleado")
+            .populate("idinsumo")
             res.json({ fertilizacion });
         } catch (error) {
             res.status(500).json({ error: "Error al obtener las fertilizaciones" });
@@ -23,7 +26,10 @@ const httpFertilizacion= {
     },
     getFertilizacionActivas: async (req, res) => {
         try {
-          const fertilizacionActiva = await Fertilizacion.find({ estado: 1});
+          const fertilizacionActiva = await Fertilizacion.find({ estado: 1})
+          .populate("idcultivo")
+          .populate("idempleado")
+          .populate("idinsumo")
           res.json({ fertilizacionActiva });
              } catch (error) {
           console.log(error);
@@ -32,7 +38,10 @@ const httpFertilizacion= {
       },
     getFertilzacionInactivas: async (req, res) => {
         try {
-          const fertilizacionDesactivada = await Fertilizacion.find({ estado: 0 });
+          const fertilizacionDesactivada = await Fertilizacion.find({ estado: 0 })
+          .populate("idcultivo")
+          .populate("idempleado")
+          .populate("idinsumo")
           res.json({ fertilizacionDesactivada });
         } catch (error) {
           console.log(error);
@@ -41,8 +50,8 @@ const httpFertilizacion= {
       },
     postFertilizacion: async (req, res) => {
         try {
-            const { idcultivo,idempleado,idinventario,idinsumo,estadoFenologico,tipo,nombreFertilizante,cantidad } = req.body;
-            const nuevaFertilizacion = new Fertilizacion({idcultivo,idempleado,idinventario,idinsumo,estadoFenologico,tipo,nombreFertilizante,cantidad });
+            const { idcultivo,idempleado,idinsumo,estadoFenologico,tipo,nombreFertilizante,cantidad } = req.body;
+            const nuevaFertilizacion = new Fertilizacion({idcultivo,idempleado,idinsumo,estadoFenologico,tipo,nombreFertilizante,cantidad });
             await nuevaFertilizacion.save();
             res.status(201).json({ nuevaFertilizacion });
         } catch (error) {
@@ -53,8 +62,8 @@ const httpFertilizacion= {
     putFertilizacion: async (req, res) => {
         try {
             const { id } = req.params;
-            const { idcultivo,idempleado,idinventario,idinsumo,estadoFenologico,tipo,nombreFertilizante,cantidad  } = req.body;
-            const fertilizacionActualizada = await Fertilizacion.findByIdAndUpdate(id, { idcultivo,idempleado,idinventario,idinsumo,estadoFenologico,tipo,nombreFertilizante,cantidad  }, { new: true });
+            const { idcultivo,idempleado,idinsumo,estadoFenologico,tipo,nombreFertilizante,cantidad  } = req.body;
+            const fertilizacionActualizada = await Fertilizacion.findByIdAndUpdate(id, { idcultivo,idempleado,idinsumo,estadoFenologico,tipo,nombreFertilizante,cantidad  }, { new: true });
             res.json({ fertilizacionActualizada });
         } catch (error) {
             res.status(400).json({ error: "No se pudo actualizar la fertilizacion" });
