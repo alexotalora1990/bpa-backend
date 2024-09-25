@@ -37,7 +37,7 @@ router.post("/agregar",[
     validarCampos
 ], httpRiegos.postRiego);
 
-router.put("/actualizar",[
+router.put("/actualizar/:id",[
     check("id", "El id  es requerido").notEmpty(),
     check("id", "El id es invalido").isMongoId(),
 
