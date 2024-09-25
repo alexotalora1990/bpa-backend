@@ -27,7 +27,7 @@ const httpRiegos= {
   
     postRiego: async (req, res) => {
         try {
-            const { idcultivo,idempleado, diasTransplante,fenologico,horaInicio,horaFin,dosis,cantidadAgua } = req.body;
+            const { idcultivo,idempleado, diasTransplante,fenologico,horaInicio,horaFin,dosis,cantidadAgua} = req.body;
             const nuevoRiego = new Riego({ idcultivo,idempleado, diasTransplante,fenologico,horaInicio,horaFin,dosis,cantidadAgua});
             await nuevoRiego.save();
             res.status(201).json({ nuevoRiego });
