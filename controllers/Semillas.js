@@ -3,7 +3,8 @@ import Semilla from "../models/Semillas.js"
 const httpSemillas= {
     getSemillas: async (req,res) => {
         try {
-            const semilla = await Semilla.find();
+            const semilla = await Semilla.find()
+            .populate("idfincas")
             res.json({ semilla});
         } catch (error) {
             res.status(500).json({ error: "Error al obtener las Semillas" });
@@ -23,8 +24,9 @@ const httpSemillas= {
     },
     getSemillasActivas: async (req, res) => {
         try {
-          const semillaActiva = await Semilla.find({ estado: 1});
-          res.json({ semillaActiva });
+          const semillaActiva = await Semilla.find({ estado: 1})
+          .populate("idfincas")
+          res.json({ semillaActiva })
              } catch (error) {
           console.log(error);
           res.status(500).json({ error: "Error al obtener las semillas Activas" });
@@ -32,8 +34,9 @@ const httpSemillas= {
       },
     getSemillasInactivas: async (req, res) => {
         try {
-          const semillaDesactivada = await Semilla.find({ estado: 0 });
-          res.json({ semillaDesactivada });
+          const semillaDesactivada = await Semilla.find({ estado: 0 })
+          .populate("idfincas")
+          res.json({ semillaDesactivada })
         } catch (error) {
           console.log(error);
           res.status(500).json({ error: "Error al obtener las semillas desactivadas" });
@@ -41,8 +44,8 @@ const httpSemillas= {
       },
       postSemilla: async (req, res) => {
         try {
-            const { nombre, fechaVencimiento, especie } = req.body;
-            const nuevaSemilla = new Semilla({  nombre, fechaVencimiento, especie, ...req.body });
+            const { idfincas, nombre, fechaVencimiento, especie } = req.body;
+            const nuevaSemilla = new Semilla({ idfincas, nombre, fechaVencimiento, especie, ...req.body });
             await nuevaSemilla.save();
             res.json({ nuevaSemilla });
         } catch (error) {

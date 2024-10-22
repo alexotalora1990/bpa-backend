@@ -54,10 +54,9 @@ check("muestra","muestra de Analisis de Suelo no debe estar vacio").notEmpty(),
 check("cultivo","cultivo no debe estar vacio").notEmpty(),
 check("laboratorio","Laboratorio no debe estar vacio").notEmpty(),
 check("recomendaciones","recomendaciones de Analisis no debe estar vacio").notEmpty(),
-check("resultados","Resultados no debe estar vacio").notEmpty(),
 check("idparcela").custom(helpersParcelas.validarExistaIdParcela),
 check("idempleado").custom(helpersEmpleado.validarExistaIdEmpleados),
-validarCampos,
+validarCampos, 
 // validarJWT,
 ], httpsAnalisisSuelo.postAnalisisSuelo);
 
