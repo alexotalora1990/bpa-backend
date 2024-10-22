@@ -13,7 +13,7 @@ const semillaSchema = new mongoose.Schema({
     observaciones:{type: String,required:true},
     cantidad:{type: Number,required:true},
     estado:{type:Number,default:1}
-})
+}) 
 
 
 export default mongoose.model("Semilla", semillaSchema)

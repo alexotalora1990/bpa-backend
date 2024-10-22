@@ -3,7 +3,9 @@ import AnalisisSuelo from '../models/AnalisisSuelo.js';
 const httpsAnalisisSuelo={
 getAnalisisSuelo: async (req, res) => {
     try {
-        const analisis= await AnalisisSuelo.find();
+        const analisis= await AnalisisSuelo.find()
+        .populate("idparcela")
+        .populate("idempleado")
         res.json(analisis);
     } catch (error) {
         res.status(500).json({error: error.message});
@@ -24,10 +26,14 @@ getAnalisisSueloID: async (req, res) => {
 },
 getAnalisisSueloActivos: async (req, res) => {
     const analisis = await AnalisisSuelo.find({estado: 1})
+    .populate("idparcela")
+    .populate("idempleado")
     res.json({ analisis })
 },
 getAnalisisSueloInactivos: async (req, res) => {
     const analisis = await AnalisisSuelo.find({estado: 0})
+    .populate("idparcela")
+    .populate("idempleado")
     res.json({ analisis })
 },
 postAnalisisSuelo: async (req, res) => {
